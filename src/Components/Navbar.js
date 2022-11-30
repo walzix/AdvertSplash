@@ -11,20 +11,27 @@ import { HiUpload } from "react-icons/hi";
 import { TiDocumentDelete } from "react-icons/ti";
 import { FaBars } from "react-icons/fa";
 import { BsSearch } from "react-icons/bs";
+import { BiUserCircle } from "react-icons/bi";
+import { AiOutlinePoweroff } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import logo1 from "./images/logo.png";
 const Navbar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenSearch, setIsOpenSearch] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  const toggleSearch = () => setIsOpenSearch(!isOpenSearch);
   const inputAnimation = {
     hidden: {
       width: 0,
       padding: 0,
-      opacity: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.2,
+      },
     },
     show: {
-      width: "120px",
-      height: "25px",
+      width: "200px",
+      height: "35px",
       padding: "5px 15px",
       opacity: 1,
       transition: {
@@ -93,7 +100,36 @@ const Navbar = ({ children }) => {
 
   return (
     <>
-      <nav className="main_top_nav"></nav>
+      <nav className="main_top_nav">
+         <div className="search_bar">
+         <div className="login_button_container">
+          <div className="login"><AiOutlinePoweroff /></div>
+        </div>
+         <div className="search_icon">
+            <BsSearch onClick={toggleSearch} className="search_icon" />
+          </div>
+          <AnimatePresence>
+            {isOpenSearch && (
+              <motion.input
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+                variants={inputAnimation}
+                placeholder="Search..."
+              />
+            )}
+          </AnimatePresence>
+        </div>
+        <div className="user_name_icon">
+        <div className="line"></div>
+         <div>
+          <h5 className="user_name">Walzix</h5>
+         </div>
+         <div className="user_icon">
+         <BiUserCircle />
+         </div>
+        </div>
+      </nav>
     <div className="main_container">
       <motion.div
         animate={{
@@ -101,7 +137,7 @@ const Navbar = ({ children }) => {
           transition: {
             duration: 0.5,
             type: "spring",
-            damping: 8,
+            damping: 7,
           },
         }}
         className="sidebar"
@@ -122,22 +158,7 @@ const Navbar = ({ children }) => {
             <FaBars onClick={toggle} />
           </div>
         </div>
-        <div className="search_bar">
-          <div className="search_icon">
-            <BsSearch onClick={toggle} className="search_icon" />
-          </div>
-          <AnimatePresence>
-            {isOpen && (
-              <motion.input
-                initial="hidden"
-                animate="show"
-                exit="hidden"
-                variants={inputAnimation}
-                placeholder="Search..."
-              />
-            )}
-          </AnimatePresence>
-        </div>
+       
         <section className="routes">
           {routes.map((route) => (
             <NavLink
