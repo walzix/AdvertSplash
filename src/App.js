@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React from 'react'
+import { BrowserRouter , Route , Routes } from 'react-router-dom' 
+import Navbar from './Components/Navbar'
+import Deshboard from './Components/Deshboard'
+import Users from './Components/Users'
+import Sites from './Components/Sites'
+import Apps from './Components/Apps'
+import Statistics from './Components/Statistics'
+import UploadReports from './Components/UploadReports'
+import UploadReportsApp from './Components/UploadReportsApp'
+import DeleteReports from './Components/DeleteReports'
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+<BrowserRouter>
+<Navbar>
+<Routes>
+  <Route path="/" element={<Deshboard/>}/>
+  <Route path="/Users" element={<Users/>}/>
+  <Route path="/Sites" element={<Sites/>}/>
+  <Route path="/Apps" element={<Apps/>}/>
+  <Route path="/Statistics" element={<Statistics/>}/>
+  <Route path="/UploadReports" element={<UploadReports/>}/>
+  <Route path="/UploadReportsApp" element={<UploadReportsApp/>}/>
+  <Route path="/DeleteReports" element={<DeleteReports/>}/>
+</Routes>
+</Navbar>
+</BrowserRouter>
+    </>
+  )
 }
 
-export default App;
+export default App

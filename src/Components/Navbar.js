@@ -1,0 +1,173 @@
+import React, { useState } from "react";
+import "../Components/Navbar.css";
+import { motion, AnimatePresence } from "framer-motion";
+import { SiHubspot } from "react-icons/si";
+import { FiUsers } from "react-icons/fi";
+import { CgWebsite } from "react-icons/cg";
+import { IoIosApps } from "react-icons/io";
+import { BiStats } from "react-icons/bi";
+import { TbFileUpload } from "react-icons/tb";
+import { HiUpload } from "react-icons/hi";
+import { TiDocumentDelete } from "react-icons/ti";
+import { FaBars } from "react-icons/fa";
+import { BsSearch } from "react-icons/bs";
+import { NavLink } from "react-router-dom";
+import logo1 from "./images/logo.png";
+const Navbar = ({ children }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
+  const inputAnimation = {
+    hidden: {
+      width: 0,
+      padding: 0,
+      opacity: 0,
+    },
+    show: {
+      width: "120px",
+      height: "25px",
+      padding: "5px 15px",
+      opacity: 1,
+      transition: {
+        duration: 0.2,
+      },
+    },
+  };
+  const showAnimation = {
+    hidden: {
+      width: 0,
+      opacity: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+    show: {
+      width: "auto",
+      opacity: 1,
+      transition: {
+        duration: 0.2,
+      },
+    },
+  };
+  const routes = [
+    {
+      path: "/",
+      name: "Deshboard",
+      icon: <SiHubspot />,
+    },
+    {
+      path: "/USers",
+      name: "Users",
+      icon: <FiUsers />,
+    },
+    {
+      path: "/Sites",
+      name: "Sites",
+      icon: <CgWebsite />,
+    },
+    {
+      path: "/Apps",
+      name: "Apps",
+      icon: <IoIosApps />,
+    },
+    {
+      path: "/Statistics",
+      name: "Statistics",
+      icon: <BiStats />,
+    },
+    {
+      path: "/UploadReports",
+      name: "Upload Reports",
+      icon: <TbFileUpload />,
+    },
+    {
+      path: "/UploadReportsApp",
+      name: "Upload Reports App",
+      icon: <HiUpload />,
+    },
+    {
+      path: "/DeleteReports",
+      name: "Delete Reports",
+      icon: <TiDocumentDelete />,
+    },
+  ];
+
+  return (
+    <>
+      <nav className="main_top_nav"></nav>
+    <div className="main_container">
+      <motion.div
+        animate={{
+          width: isOpen ? "210px" : "50px",
+          transition: {
+            duration: 0.5,
+            type: "spring",
+            damping: 8,
+          },
+        }}
+        className="sidebar"
+      >
+        <div className="top_section">
+          {isOpen && (
+            <motion.img
+              variants={showAnimation}
+              initial="hidden"
+              animate="show"
+              exit="hidden"
+              className="logo"
+              src={logo1}
+              alt={logo1}
+            />
+          )}
+          <div className="bars">
+            <FaBars onClick={toggle} />
+          </div>
+        </div>
+        <div className="search_bar">
+          <div className="search_icon">
+            <BsSearch onClick={toggle} className="search_icon" />
+          </div>
+          <AnimatePresence>
+            {isOpen && (
+              <motion.input
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+                variants={inputAnimation}
+                placeholder="Search..."
+              />
+            )}
+          </AnimatePresence>
+        </div>
+        <section className="routes">
+          {routes.map((route) => (
+            <NavLink
+              activeClassName="active"
+              to={route.path}
+              key={route.name}
+              className="links"
+            >
+              <div className="icons">{route.icon}</div>
+              <AnimatePresence>
+                {isOpen && (
+                  <motion.div
+                    variants={showAnimation}
+                    initial="hidden"
+                    animate="show"
+                    exit="hidden"
+                    className="Link_text"
+                  >
+                    {route.name}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </NavLink>
+          ))}
+        </section>
+      </motion.div>
+      <main>{children}</main>
+    </div>
+    </>
+  );
+};
+
+export default Navbar;
