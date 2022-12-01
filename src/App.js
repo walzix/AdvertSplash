@@ -1,15 +1,15 @@
 import React from 'react'
 import "./App.css"
 import { BrowserRouter , Route , Routes } from 'react-router-dom' 
-import Navbar from './Components/Navbar'
-import Deshboard from './Components/Deshboard'
-import Users from './Components/Users'
-import Sites from './Components/Sites'
-import Apps from './Components/Apps'
-import Statistics from './Components/Statistics'
-import UploadReports from './Components/UploadReports'
-import UploadReportsApp from './Components/UploadReportsApp'
-import DeleteReports from './Components/DeleteReports'
+import Navbar from './Components/NavBar/Navbar'
+import Deshboard from './Pages/Deshboard/Deshboard'
+import Users from './Pages/Users/Users'
+import Sites from './Pages/Sites/Sites'
+import Apps from './Pages/Apps/Apps'
+import Statistics from './Pages/Statistics/Statistics'
+import UploadReports from './Pages/UploadReports/UploadReports'
+import UploadReportsApp from './Pages/UploadReportsApp/UploadReportsApp'
+import DeleteReports from './Pages/DeleteReports/DeleteReports'
 const App = () => {
   return (
     <>

@@ -1,0 +1,36 @@
+.Active{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65%;
+    height: 30px;
+    border-radius: 5px;
+    background-color: green;
+    color: white;
+}
+.not_active{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65%;
+    height: 30px;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
+}
+.Action_btn_toggle{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+    border-radius: 10px;
+    text-align: center ;
+    width: 10%;
+    height: 30%;
+    position: absolute;
+    background-color: whitesmoke;
+
+    top: 0;
+}

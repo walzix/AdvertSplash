@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../Components/Navbar.css";
+import "../NavBar/Navbar.css";
 import { motion, AnimatePresence } from "framer-motion";
 import { SiHubspot } from "react-icons/si";
 import { FiUsers } from "react-icons/fi";
@@ -14,7 +14,7 @@ import { BsSearch } from "react-icons/bs";
 import { BiUserCircle } from "react-icons/bi";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
-import logo1 from "./images/logo.png";
+import logo1 from "../../assets/logo.png";
 const Navbar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenSearch, setIsOpenSearch] = useState(false);
@@ -62,7 +62,7 @@ const Navbar = ({ children }) => {
       icon: <SiHubspot />,
     },
     {
-      path: "/USers",
+      path: "/Users",
       name: "Users",
       icon: <FiUsers />,
     },
