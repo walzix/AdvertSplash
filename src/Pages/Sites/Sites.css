@@ -1,0 +1,54 @@
+.Stopped{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 30px;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
+}
+.siteHead_Add_download_btn{
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin: 30px;
+font-weight: 600;
+}
+.Add_download_btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: larger;
+    gap: 20px;
+}
+
+.Add_sites_btn{
+    width: 160px;
+    height: 30px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #3CB371;
+    border: none;
+    border-radius: 5px;
+    gap: 5px;
+}
+.download_btn{
+    width: 140px;
+    height: 30px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #bd931f;
+    border: none;
+    border-radius: 5px;
+    gap: 5px;
+}
+.user_add_icon{
+    font-size: 20px;
+}

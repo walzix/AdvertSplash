@@ -26,7 +26,9 @@ const Navbar = ({ children }) => {
       padding: 0,
       opacity: 1,
       transition: {
-        duration: 0.2,
+        duration: 0.5,
+        type: "spring",
+        damping: 20,
       },
     },
     show: {
@@ -35,7 +37,9 @@ const Navbar = ({ children }) => {
       padding: "5px 15px",
       opacity: 1,
       transition: {
-        duration: 0.2,
+        duration: 0.5,
+        type: "spring",
+        damping: 10,
       },
     },
   };
@@ -45,13 +49,17 @@ const Navbar = ({ children }) => {
       opacity: 0,
       transition: {
         duration: 0.5,
+        type: "spring",
+        damping: 10,
       },
     },
     show: {
       width: "auto",
       opacity: 1,
       transition: {
-        duration: 0.2,
+        duration: 0.5,
+        type: "spring",
+        damping: 8,
       },
     },
   };

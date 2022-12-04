@@ -1,9 +1,14 @@
 import React from 'react'
-
+import {motion} from "framer-motion"
 const Deshboard = () => {
   return (
-    <div>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis suscipit aspernatur deserunt corporis, optio dolores fugit consectetur omnis, mollitia possimus aut deleniti. Mollitia, et beatae deserunt explicabo accusamus fuga assumenda!</div>
-  )
+<motion.div
+    initial={{width:0}}
+    animate={{width:"100%"}}
+    exit={{x: window.innerWidth , transition:{duration: 0.1}}}
+    >
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos libero quibusdam labore similique beatae dolorum quasi magni id optio, voluptatem ea consequuntur dolorem architecto fuga doloremque culpa quae autem tenetur!
+    </motion.div>  )
 }
 
 export default Deshboard
