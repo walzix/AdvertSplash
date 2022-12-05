@@ -5,9 +5,9 @@ import { Button } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import MenuItem from "@mui/material/MenuItem";
-import {FaSitemap} from "react-icons/fa";
-import {TfiDownload} from "react-icons/tfi";
-import {motion} from "framer-motion"
+import { FaSitemap } from "react-icons/fa";
+import { TfiDownload } from "react-icons/tfi";
+import { motion } from "framer-motion";
 const Sites = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -19,14 +19,14 @@ const Sites = () => {
   };
 
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
-    { field: "User", headerName: "User", width: 220 },
-    { field: "Sites", headerName: "Site", width: 450 },
-    { field: "Themes", headerName: "Themes", width: 130 },
+    { field: "id", headerName: "ID", flex:1, },
+    { field: "User", headerName: "User", flex:1, },
+    { field: "Sites", headerName: "Site", flex:1, },
+    { field: "Themes", headerName: "Themes", flex:1, }, 
     {
       field: "Status",
       headerName: "Status",
-      width: 130,
+      flex:1,
 
       renderCell: (Users) => (
         <>
@@ -41,7 +41,7 @@ const Sites = () => {
     {
       field: "Actions",
       headerName: "Actions",
-      width: 130,
+      flex: 1,
       renderCell: (Users) => (
         <>
           <div>
@@ -147,22 +147,26 @@ const Sites = () => {
   ];
 
   return (
-   
-    <motion.div  className="Sites_table_container"
-    initial={{width:0}}
-    animate={{width:"100%"}}
-    exit={{x: window.innerWidth ,transition:{duration: 0.1}}}
+    <motion.div
+      className="Sites_table_container"
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
     >
       <div className="siteHead_Add_download_btn">
-        <div>
-          SITES
-        </div>
+        <div>SITES</div>
         <div className="Add_download_btns">
-        <button className="Add_sites_btn"> <FaSitemap className="user_add_icon" /> ADD SITES</button>
-        <button className="download_btn"> <TfiDownload className="user_add_icon" /> DOWNLOAD</button>
+          <button className="Add_sites_btn">
+            {" "}
+            <FaSitemap className="user_add_icon" /> ADD SITES
+          </button>
+          <button className="download_btn">
+            {" "}
+            <TfiDownload className="user_add_icon" /> DOWNLOAD
+          </button>
         </div>
       </div>
-      <div style={{ height: 400, width: "105%" }}>
+      <div style={{ height: 400, width: "104%" }}>
         <DataGrid
           rows={rows}
           columns={columns}

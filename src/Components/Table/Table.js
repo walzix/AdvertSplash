@@ -6,8 +6,6 @@ import Menu from "@mui/material/Menu";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import MenuItem from "@mui/material/MenuItem";
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 const Table = () => {
   
   const [search, setSearch] = useState("");
@@ -148,26 +146,26 @@ const Table = () => {
     },
   ];
   const columns = [
-    { field: "id", headerName: "ID", width: 110 },
+    { field: "id", headerName: "ID" , flex:1, },
     {
       field: "firstName",
       headerName: "First name",
-      width: 200,
+      flex:1,
     },
     {
       field: "Emails",
       headerName: "Emails",
-      width: 230,
+      flex:1, 
     },
     {
       field: "TotalSitesApps",
       headerName: "Total Sites / Apps",
-      width: 230,
+      flex:1,
     },
     {
       field: "Status",
       headerName: "Status",
-      width: 230,
+      flex:1,
       renderCell: (user) => (
         <>
           {user.row.Status === true ? (
@@ -181,7 +179,7 @@ const Table = () => {
     {
       field: "Action",
       headerName: "Action",
-      width: 130,
+      flex:1,
       editable: false,
       renderCell: (user) => (
         <>
@@ -252,8 +250,7 @@ const Table = () => {
           rows={rows}
           columns={columns}
           pageSize={5}
-          disableSelectionOnClick
-          
+          disableSelectionOnClick 
         />
       </div>
     </div>

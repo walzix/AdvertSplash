@@ -1,0 +1,13 @@
+.search__filter__date_picker__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+.date_picker{
+   height: 50px;
+}
+.filter__btn{
+width: 70px;
+height: 40px;
+}
