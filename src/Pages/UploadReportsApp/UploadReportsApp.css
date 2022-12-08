@@ -1,0 +1,63 @@
+.UploadReportsApps__form__main__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .UploadReportsApps__form__container {
+      display: flex;
+      flex-direction: column;
+    width: 80%;
+    
+    padding: 30px;
+    background-color:  #f5f7fb;
+    display: flex;
+    gap: 50px;
+    border-radius: 10px;
+  }
+  .Apps__upload__file {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 210px;
+  
+  }
+  .Apps__type__field {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 200px;
+  
+  }
+  .Apps__start_date{
+      display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 153px;
+  }
+  .Apps__uploadbtn{
+      border: none;
+  }
+  .TextField__UploadReportsApp{
+      height: 50px;
+      width: 305px;
+  }
+  .Apps__UploadReports__submit__btn{
+      width: 25%;
+      height: 40px;
+      color: white;
+      background-color: #252e58;
+      border-radius: 2px;
+      border: none;
+      cursor: pointer;
+  }
+  .Apps__Dashbord__UploadReports__{
+    padding: 20px;
+    text-align: right;
+  }
+  .Apps__Dashbord__UploadReports__span{
+    
+  color: gray;
+  }
+  .datepicker__App{
+    width: 120%;
+  }

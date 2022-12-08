@@ -8,6 +8,13 @@ import MenuItem from "@mui/material/MenuItem";
 import { FaSitemap } from "react-icons/fa";
 import { TfiDownload } from "react-icons/tfi";
 import { motion } from "framer-motion";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 const Sites = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -18,15 +25,30 @@ const Sites = () => {
     setAnchorEl(null);
   };
 
+  const [modalopen, setModalOpen] = React.useState(false);
+  const handleOpen = () => setModalOpen(true);
+  const handleClosee = () => setModalOpen(false);
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 1000,
+    bgcolor: "background.paper",
+    boxShadow: 24,
+    p: 4,
+  };
+
   const columns = [
-    { field: "id", headerName: "ID", flex:1, },
-    { field: "User", headerName: "User", flex:1, },
-    { field: "Sites", headerName: "Site", flex:1, },
-    { field: "Themes", headerName: "Themes", flex:1, }, 
+    { field: "id", headerName: "ID", flex: 1 },
+    { field: "User", headerName: "User", flex: 1 },
+    { field: "Sites", headerName: "Site", flex: 1 },
+    { field: "Themes", headerName: "Themes", flex: 1 },
     {
       field: "Status",
       headerName: "Status",
-      flex:1,
+      flex: 1,
 
       renderCell: (Users) => (
         <>
@@ -41,6 +63,7 @@ const Sites = () => {
     {
       field: "Actions",
       headerName: "Actions",
+
       flex: 1,
       renderCell: (Users) => (
         <>
@@ -145,7 +168,11 @@ const Sites = () => {
       Status: true,
     },
   ];
+  const [age, setAge] = React.useState("");
 
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
   return (
     <motion.div
       className="Sites_table_container"
@@ -156,12 +183,73 @@ const Sites = () => {
       <div className="siteHead_Add_download_btn">
         <div>SITES</div>
         <div className="Add_download_btns">
-          <button className="Add_sites_btn">
-            {" "}
+          <button className="Add_sites_btn" onClick={handleOpen}>
             <FaSitemap className="user_add_icon" /> ADD SITES
           </button>
+          {/* modal start  */}
+          <div>
+            <Modal
+              open={modalopen}
+              onClose={handleClosee}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                  <div className="ADD__SITES">
+                    <h3>ADD SITES</h3>
+                  </div>
+                  <div className="textfiled___">
+                    <TextField
+                      id="outlined-basic"
+                      label="Site Domain"
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </div>
+                  <div className="textfiled___">
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                      User ID
+                      </InputLabel>
+                      <Select
+                        fullWidth
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={age}
+                        label="User ID"
+                        onChange={handleChange}
+                      >
+                        <MenuItem value={10}></MenuItem>
+                        <MenuItem value={20}>Twenty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </div>
+                  <div className="textfiled___">
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        Site Theme
+                      </InputLabel>
+                      <Select
+                        fullWidth
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={age}
+                        label="Site Theme"
+                        onChange={handleChange}
+                      >
+                        <MenuItem value={10}></MenuItem>
+                        <MenuItem value={20}>Twenty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </div>
+                <button className="add__users__text_field__btn">SUBMIT</button>
+              </Box>
+            </Modal>
+          </div>
+          {/* modal end  */}
           <button className="download_btn">
-            {" "}
             <TfiDownload className="user_add_icon" /> DOWNLOAD
           </button>
         </div>

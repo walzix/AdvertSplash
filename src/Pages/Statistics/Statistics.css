@@ -8,6 +8,10 @@
    height: 50px;
 }
 .filter__btn{
-width: 70px;
-height: 40px;
+width: 90px;
+height: 37px;
+background-color: #252e58 ;
+border: none;
+color: white;
+border-radius: 4px;
 }

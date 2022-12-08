@@ -1,0 +1,62 @@
+.UploadReports__form__main__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.UploadReports__form__container {
+    display: flex;
+    flex-direction: column;
+  width: 80%;
+  
+  padding: 30px;
+  background-color:  #f5f7fb;
+  display: flex;
+  gap: 50px;
+  border-radius: 10px;
+}
+.upload__file {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 210px;
+
+}
+.type__field {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 200px;
+
+}
+.start_date{
+    display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 153px;
+}
+.uploadbtn{
+    border: none;
+}
+.asdf{
+  height: 50px;
+  width: 305px;
+}
+.UploadReports__submit__btn{
+    width: 25%;
+    height: 40px;
+    color: white;
+    background-color: #252e58;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+}
+.Dashbord__UploadReports__{
+  padding: 20px;
+  text-align: right;
+}
+.Dashbord__UploadReports__span{
+color: gray;
+}
+.DateRangePicker__{
+  width: 120%;
+}

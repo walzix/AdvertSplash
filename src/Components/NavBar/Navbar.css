@@ -115,6 +115,7 @@ main {
 }
 .bars {
   font-size: 28px;
+  cursor: pointer;
 }
 .Link_text {
   white-space: nowrap;

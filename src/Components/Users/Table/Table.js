@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "../Table/Table.css";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid , GridToolbar } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import MenuItem from "@mui/material/MenuItem";
-const Table = () => {
+const Table = ({handleOpen}) => {
   
   const [search, setSearch] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
@@ -146,26 +146,25 @@ const Table = () => {
     },
   ];
   const columns = [
-    { field: "id", headerName: "ID" , flex:1, },
+    { field: "id", headerName: "ID" , flex:1,  },
     {
+     
       field: "firstName",
       headerName: "First name",
-      flex:1,
-    },
+      flex:1,    },
     {
+      
       field: "Emails",
       headerName: "Emails",
-      flex:1, 
-    },
+      flex:1,    },
     {
+      
       field: "TotalSitesApps",
       headerName: "Total Sites / Apps",
-      flex:1,
-    },
+      flex:1,    },
     {
-      field: "Status",
+      flex:1,            field: "Status",
       headerName: "Status",
-      flex:1,
       renderCell: (user) => (
         <>
           {user.row.Status === true ? (
@@ -177,9 +176,9 @@ const Table = () => {
       ),
     },
     {
+      flex:1,
       field: "Action",
       headerName: "Action",
-      flex:1,
       editable: false,
       renderCell: (user) => (
         <>
@@ -226,31 +225,17 @@ const Table = () => {
           USERS
         </div>
         <div className="Add_download_btns">
-        <button className="Add_sites_btn"> <AiOutlineUserAdd className="Add_icon" /> ADD USERS </button>
+        <button className="Add_sites_btn" onClick={handleOpen}> <AiOutlineUserAdd className="Add_icon" /> ADD USERS </button>
         </div>
       </div>
       
-      <div style={{ height: 400, width: "105%" }}>
-      <div className="users_search_input">
-      Search
-        <input className="user_search__input" type="text" 
-        placeholder="Search..." 
-        value={search}
-        onChange={(e) =>setSearch(e.target.value)}
-         />
-         {/* <TextField
-          id="filled-textarea"
-          label="Search"
-          placeholder="Search"
-          multiline
-          variant="filled"
-        /> */}
-      </div>
+      <div style={{ height: 450, width: "105%" }}>
         <DataGrid
           rows={rows}
           columns={columns}
           pageSize={5}
           disableSelectionOnClick 
+          components={{Toolbar : GridToolbar}}
         />
       </div>
     </div>

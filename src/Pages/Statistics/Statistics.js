@@ -4,7 +4,8 @@ import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import { motion } from "framer-motion";
 import DatePicker from "react-multi-date-picker"
-
+import "react-multi-date-picker/styles/backgrounds/bg-dark.css"
+import transition from "react-element-popper/animations/transition"
 const Statistics = () => {
   const today = new Date()
   const tomorrow = new Date()
@@ -77,7 +78,13 @@ const Statistics = () => {
     >
     <div className="search__filter__date_picker__container">
     <div>
-    <DatePicker className="date_picker"
+    <DatePicker className="bg-dark"
+    animations={[
+        transition({
+          from: 35,
+          transition: "all 400ms cubic-bezier(0.335, 0.010, 0.030, 1.360)",
+        }),
+      ]} 
       multiple
       value={values} 
       onChange={setValues}
