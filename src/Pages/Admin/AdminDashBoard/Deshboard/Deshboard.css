@@ -1,0 +1,78 @@
+.Deshboard {
+  width: 100%;
+  height: 100%;
+    overflow: hidden;
+  /* background-color: aquamarine; */
+}
+.bottom {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 50vh;
+
+  margin-top: 10px;
+}
+.bottom__left {
+  width: 10%;
+  height: 100%;
+}
+.bottom__right {
+  width: 25%;
+  height: 100%;
+}
+.bottom__center{
+     width: 63%;
+  height: 100%;
+  /* background-color: aqua; */
+}
+.top {
+  width: 100%;
+}
+.bottom__left__sites{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+.left__sites{
+    display: flex;
+    margin-left: 60px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    height: 30%;
+    background-color: #252e58;
+    color: white;
+    position: relative;
+    border-radius: 5px;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1023%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='%230e2a47'%3e%3c/rect%3e%3cpath d='M673 524L1010 861' stroke-width='6' stroke='url(%23SvgjsLinearGradient1024)' stroke-linecap='round' class='TopLeft'%3e%3c/path%3e%3cpath d='M947 549L1334 936' stroke-width='6' stroke='url(%23SvgjsLinearGradient1024)' stroke-linecap='round' class='TopLeft'%3e%3c/path%3e%3cpath d='M1407 155L1104 -148' stroke-width='6' stroke='url(%23SvgjsLinearGradient1024)' stroke-linecap='round' class='TopLeft'%3e%3c/path%3e%3cpath d='M941 63L541 -337' stroke-width='10' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M387 379L733 725' stroke-width='10' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M156 534L525 903' stroke-width='10' stroke='url(%23SvgjsLinearGradient1024)' stroke-linecap='round' class='TopLeft'%3e%3c/path%3e%3cpath d='M883 311L591 19' stroke-width='8' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M888 205L1185 502' stroke-width='8' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M893 305L1200 612' stroke-width='10' stroke='url(%23SvgjsLinearGradient1024)' stroke-linecap='round' class='TopLeft'%3e%3c/path%3e%3cpath d='M445 132L176 -137' stroke-width='10' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M450 129L631 310' stroke-width='8' stroke='url(%23SvgjsLinearGradient1024)' stroke-linecap='round' class='TopLeft'%3e%3c/path%3e%3cpath d='M321 333L735 747' stroke-width='8' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M1153 340L992 179' stroke-width='10' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M7 281L-202 72' stroke-width='10' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M568 20L217 -331' stroke-width='10' stroke='url(%23SvgjsLinearGradient1024)' stroke-linecap='round' class='TopLeft'%3e%3c/path%3e%3cpath d='M937 421L591 75' stroke-width='8' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M272 79L596 403' stroke-width='10' stroke='url(%23SvgjsLinearGradient1024)' stroke-linecap='round' class='TopLeft'%3e%3c/path%3e%3cpath d='M1383 188L1690 495' stroke-width='8' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M855 372L599 116' stroke-width='6' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M1419 453L1046 80' stroke-width='8' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M1249 2L1579 332' stroke-width='6' stroke='url(%23SvgjsLinearGradient1024)' stroke-linecap='round' class='TopLeft'%3e%3c/path%3e%3cpath d='M412 27L603 218' stroke-width='8' stroke='url(%23SvgjsLinearGradient1024)' stroke-linecap='round' class='TopLeft'%3e%3c/path%3e%3cpath d='M95 495L-213 187' stroke-width='8' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M20 132L237 349' stroke-width='8' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M744 496L1099 851' stroke-width='8' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M1298 4L1093 -201' stroke-width='6' stroke='url(%23SvgjsLinearGradient1024)' stroke-linecap='round' class='TopLeft'%3e%3c/path%3e%3cpath d='M39 224L-260 -75' stroke-width='10' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M1090 212L1267 389' stroke-width='6' stroke='url(%23SvgjsLinearGradient1024)' stroke-linecap='round' class='TopLeft'%3e%3c/path%3e%3cpath d='M532 342L803 613' stroke-width='6' stroke='url(%23SvgjsLinearGradient1024)' stroke-linecap='round' class='TopLeft'%3e%3c/path%3e%3cpath d='M698 295L428 25' stroke-width='10' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M595 500L818 723' stroke-width='10' stroke='url(%23SvgjsLinearGradient1024)' stroke-linecap='round' class='TopLeft'%3e%3c/path%3e%3cpath d='M166 545L317 696' stroke-width='8' stroke='url(%23SvgjsLinearGradient1024)' stroke-linecap='round' class='TopLeft'%3e%3c/path%3e%3cpath d='M148 538L332 722' stroke-width='10' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M798 84L1036 322' stroke-width='8' stroke='url(%23SvgjsLinearGradient1024)' stroke-linecap='round' class='TopLeft'%3e%3c/path%3e%3cpath d='M1116 485L1286 655' stroke-width='10' stroke='url(%23SvgjsLinearGradient1024)' stroke-linecap='round' class='TopLeft'%3e%3c/path%3e%3cpath d='M1429 101L1260 -68' stroke-width='10' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M146 233L-207 -120' stroke-width='10' stroke='url(%23SvgjsLinearGradient1024)' stroke-linecap='round' class='TopLeft'%3e%3c/path%3e%3cpath d='M545 218L155 -172' stroke-width='6' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3cpath d='M1143 76L1473 406' stroke-width='8' stroke='url(%23SvgjsLinearGradient1025)' stroke-linecap='round' class='BottomRight'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1023'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='100%25' y1='100%25' x2='0%25' y2='0%25' id='SvgjsLinearGradient1024'%3e%3cstop stop-color='rgba(28%2c 83%2c 142%2c 0)' offset='0'%3e%3c/stop%3e%3cstop stop-color='%231c538e' offset='1'%3e%3c/stop%3e%3c/linearGradient%3e%3clinearGradient x1='0%25' y1='0%25' x2='100%25' y2='100%25' id='SvgjsLinearGradient1025'%3e%3cstop stop-color='rgba(28%2c 83%2c 142%2c 0)' offset='0'%3e%3c/stop%3e%3cstop stop-color='%231c538e' offset='1'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");
+    background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    -webkit-transition: all 0.9s 0s ease;
+    -moz-transition: all 0.9s 0s ease;
+    -o-transition: all 0.9s 0s ease;
+    transition: all 0.9s 0s ease;
+}
+.Sits__Apps__webmstr{
+    font-size: 17px;
+    font-weight: 500;
+}
+.countss{
+    font-size: 25px;
+    font-weight: 700;
+}
+.Revenue__chart{
+display: flex;
+justify-content: center;
+align-items: center;
+font-weight: 700;
+}

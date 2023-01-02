@@ -1,0 +1,22 @@
+.search__filter__date_picker__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+.date_picker{
+   height: 50px;
+}
+.filter__btn{
+width: 90px;
+height: 37px;
+background-color: #252e58 ;
+border: none;
+color: white;
+border-radius: 4px;
+}
+.statistics__table{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
