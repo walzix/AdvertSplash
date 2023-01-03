@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import "../../../../Pages/Admin/AdminDashBoard/Sites/Sites.css";
+import "./Sites.css";
 import { Button } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";

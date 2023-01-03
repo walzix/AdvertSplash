@@ -1,7 +1,7 @@
 import React from "react";
-import "../../../../Pages/Admin/AdminDashBoard/Deshboard/Deshboard.css";
-import DeshboardCards from "../../../../Components/Admin/Admin Deshboard cards/DeshboardCards";
-import SplineChart from "../../../../Components/Admin/Admin Deshboard Charts/SplineChart";
+import "./Deshboard.css";
+import DeshboardCards from "../../../Components/Admin/Admin Deshboard cards/DeshboardCards";
+import SplineChart from "../../../Components/Admin/Admin Deshboard Charts/SplineChart";
 import { motion } from "framer-motion";
 const Deshboard = () => {
   return (

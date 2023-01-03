@@ -2,16 +2,16 @@ import React , {useEffect} from "react";
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import AdminLogin from "./Pages/Admin/AdminDashBoard/Admin Login/AdminLogin";
-import UserLogin from "./Pages/User/UserDashboard/User Login/UserLogin";
-import UserSignUp from "./Pages/User/UserDashboard/User Sign Up/UserSignUp";
+import AdminLogin from "./Pages/Admin/Admin Login/AdminLogin";
+import UserLogin from "./Pages/User/User Login/UserLogin";
+import UserSignUp from "./Pages/User/User Sign Up/UserSignUp";
 import User from "../src/Pages/User/User";
 import Admin from "./Pages/Admin/Admin";
 import ErrorPage from "./Pages/ErrorPage";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true
 
 
 const App = (setRefresh, refresh) => {
@@ -94,8 +94,7 @@ const App = (setRefresh, refresh) => {
       </div>
     );
   }
-    // let cookies = document.cookies.getItem("API_TOKEN")
-    // console.log(cookies);
+    
   return (
     <>
       <BrowserRouter>

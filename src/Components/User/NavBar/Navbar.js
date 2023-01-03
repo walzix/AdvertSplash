@@ -15,14 +15,14 @@ import { BiUserCircle } from "react-icons/bi";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import logo1 from "../../../assets/logo.png";
 import { useLocation } from "react-router-dom";
-import Deshboard from "../../../Pages/Admin/AdminDashBoard/Deshboard/Deshboard";
-import Users from "../../../Pages/Admin/AdminDashBoard/Users lists/Users";
-import Sites from "../../../Pages/Admin/AdminDashBoard/Sites/Sites";
-import Apps from "../../../Pages/Admin/AdminDashBoard/Apps/Apps";
-import Statistics from "../../../Pages/Admin/AdminDashBoard/Statistics/Statistics";
-import UploadReports from "../../../Pages/Admin/AdminDashBoard/UploadReports/UploadReports";
-import UploadReportsApp from "../../../Pages/Admin/AdminDashBoard/UploadReportsApp/UploadReportsApp";
-import DeleteReports from "../../../Pages/Admin/AdminDashBoard/DeleteReports/DeleteReports";
+import Deshboard from "../../../Pages/Admin/Deshboard/Deshboard";
+import Users from "../../../Pages/Admin/Users lists/Users";
+import Sites from "../../../Pages/Admin/Sites/Sites";
+import Apps from "../../../Pages/Admin/Apps/Apps";
+import Statistics from "../../../Pages/Admin/Statistics/Statistics";
+import UploadReports from "../../../Pages/Admin/UploadReports/UploadReports";
+import UploadReportsApp from "../../../Pages/Admin/UploadReportsApp/UploadReportsApp";
+import DeleteReports from "../../../Pages/Admin/DeleteReports/DeleteReports";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -32,22 +32,20 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Navbar = ({ setRefresh, refresh }) => {
   const Navigate = useNavigate();
-  const HandleClearStorge = (e) => {
+  const handleLogout = (e) => {
     axios
       .get("http://localhost:7000/api/users/logout")
       .then((res) => {
         console.log(res);
-        toast.success(res.data.message);
-        if (res.status(200).clearCookie("auth_token_usr").json) {
-          alert("Logout");
-          Navigate("/User");
+        if (res.status===200){
+          toast.success(res.data.message);
+          setRefresh(!refresh)
         }
       })
       .catch((err) => {
         console.log(err);
         toast.warn(err.response.data.message);
       });
-    // setRefresh(!refresh);
   };
 
   const path = useLocation().pathname;
@@ -161,7 +159,7 @@ const Navbar = ({ setRefresh, refresh }) => {
         <div className="search_bar">
           <div className="login_button_container">
             <div className="login">
-              <AiOutlinePoweroff onClick={HandleClearStorge} />
+              <AiOutlinePoweroff onClick={handleLogout} />
             </div>
           </div>
           <div className="search_icon">

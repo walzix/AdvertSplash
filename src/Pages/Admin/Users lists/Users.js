@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Table from "../../../../Components/Admin/Admin Users table/Table/Table";
+import Table from "../../../Components/Admin/Admin Users table/Table/Table";
 import "../Users lists/Users.css";
 import { motion } from "framer-motion";
 import Box from "@mui/material/Box";
