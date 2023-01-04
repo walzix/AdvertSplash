@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../Table/Table.css";
+import "./UsersTable.css";
 import { DataGrid , GridToolbar } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
 import Menu from "@mui/material/Menu";
@@ -7,7 +7,7 @@ import { AiOutlineUserAdd } from "react-icons/ai";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
-const Table = ({handleOpen}) => {
+const UsersTable = ({handleOpen}) => {
   
   const [search, setSearch] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
@@ -245,4 +245,4 @@ const Table = ({handleOpen}) => {
     </div>
   );
 };
-export default Table;
+export default UsersTable;

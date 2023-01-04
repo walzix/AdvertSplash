@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import Table from "../../../Components/Admin/Admin Users table/Table/Table";
-import "../Users lists/Users.css";
+import UsersTable from "../../../Components/Admin/AdminTables/UsersTable/UsersTable";
 import { motion } from "framer-motion";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 
-const Users = () => {
+const UsersLists = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -30,7 +29,7 @@ const Users = () => {
       animate={{ width: "100%" }}
       exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
     >
-      <Table handleOpen={handleOpen} />
+      <UsersTable handleOpen={handleOpen} />
       <div>
         <Modal
           open={open}
@@ -111,4 +110,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default UsersLists;

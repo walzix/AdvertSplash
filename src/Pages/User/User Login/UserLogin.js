@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "../User Login/UserLogin.css";
 import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
@@ -13,11 +13,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 // axios.defaults.withCredentials = true;
 
 const UserLogin = ({ setRefresh, refresh }) => {
-  const secure = window.location.protocol === 'https'
+  const secure = window.location.protocol === "https";
 
   const [userData, setUserData] = useState({
     email: "",
@@ -55,14 +55,10 @@ const UserLogin = ({ setRefresh, refresh }) => {
       axios
         .post("http://localhost:7000/api/users/login", body)
         .then((res) => {
-          // console.log(res);
+          console.log(res);
           if (res.status === 200) {
             toast.success(res.data.message);
-            console.log('**********************************************')
-            console.log(res.headers)
-            console.log('**********************************************')
-            console.log('Cookie: '+res.headers["Set-Cookie"])
-            setRefresh(!refresh)
+            setRefresh(!refresh);
           }
         })
         .catch((err) => {

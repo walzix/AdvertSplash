@@ -1,46 +1,45 @@
-import React , {useEffect} from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import AdminLogin from "./Pages/Admin/Admin Login/AdminLogin";
+import AdminLogin from "./Pages/Admin/AdminLogin/AdminLogin";
 import UserLogin from "./Pages/User/User Login/UserLogin";
 import UserSignUp from "./Pages/User/User Sign Up/UserSignUp";
 import User from "../src/Pages/User/User";
 import Admin from "./Pages/Admin/Admin";
 import ErrorPage from "./Pages/ErrorPage";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-axios.defaults.withCredentials = true
-
+axios.defaults.withCredentials = true;
 
 const App = (setRefresh, refresh) => {
+  const [loading, setLoading] = React.useState(false);
+  const [userData, setUserData] = React.useState("admin");
   function AdminWhole() {
-    
-
     const [refresh, setRefresh] = React.useState(true);
-
+    const [checkAdminSession, setCheckAdminSession] = React.useState(false);
+    axios
+      .get(process.env.REACT_APP_BACKEND_URL + "/api/admin/checkAdminSession")
+      .then((res) => {
+        // console.log(res);
+        if (res.status === 200) {
+          setCheckAdminSession(true);
+        } else {
+          setCheckAdminSession(false);
+        }
+      })
+      .catch((err) => {
+        // console.log(err);
+      });
     return (
       <div className="App">
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-      {/* Same as */}
-      <ToastContainer />
-        {localStorage.userType === "Admin" ? (
+        {checkAdminSession ? (
           <>
             <Admin
               setRefresh={(item) => {
                 setRefresh(item);
+              }}
+              setCheckAdminSession={(item) => {
+                setCheckAdminSession(item);
               }}
               refresh={refresh}
             />
@@ -59,13 +58,14 @@ const App = (setRefresh, refresh) => {
   function UserWhole() {
     const [refresh, setRefresh] = React.useState(true);
     const [checkUserSession, setCheckUserSession] = React.useState(false);
-
-      axios
-      .get("http://localhost:7000/api/users/checkUserSession")
+    axios
+      .get(process.env.REACT_APP_BACKEND_URL + "/api/users/checkUserSession")
       .then((res) => {
         // console.log(res);
         if (res.status === 200) {
-          setCheckUserSession(true)
+          setCheckUserSession(true);
+        } else {
+          setCheckUserSession(false);
         }
       })
       .catch((err) => {
@@ -79,6 +79,9 @@ const App = (setRefresh, refresh) => {
             <User
               setRefresh={(item) => {
                 setRefresh(item);
+              }}
+              setCheckUserSession={(item) => {
+                setCheckUserSession(item);
               }}
               refresh={refresh}
             />
@@ -94,7 +97,7 @@ const App = (setRefresh, refresh) => {
       </div>
     );
   }
-    
+
   return (
     <>
       <BrowserRouter>
@@ -107,7 +110,7 @@ const App = (setRefresh, refresh) => {
             refresh={refresh}
           />
           <Route path="/Admin" element={AdminWhole()} />
-          <Route path="/Admin/Deshboard" element={AdminWhole()} />
+          <Route path="/Admin/Dashboard" element={AdminWhole()} />
           <Route path="/Admin/Users" element={AdminWhole()} />
           <Route path="/Admin/Sites" element={AdminWhole()} />
           <Route path="/Admin/Apps" element={AdminWhole()} />

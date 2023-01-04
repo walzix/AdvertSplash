@@ -16,19 +16,35 @@ import { AiOutlinePoweroff } from "react-icons/ai";
 import { Navigate, NavLink } from "react-router-dom";
 import logo1 from "../../../assets/logo.png";
 import { useLocation, useNavigate } from "react-router-dom";
-import Deshboard from "../../../Pages/Admin/Deshboard/Deshboard";
-import Users from "../../../Pages/Admin/Users lists/Users";
+import Dashboard from "../../../Pages/Admin/Dashboard/Dashboard";
+import Users from "../../../Pages/Admin/UsersLists/UsersLists";
 import Sites from "../../../Pages/Admin/Sites/Sites";
 import Apps from "../../../Pages/Admin/Apps/Apps";
 import Statistics from "../../../Pages/Admin/Statistics/Statistics";
 import UploadReports from "../../../Pages/Admin/UploadReports/UploadReports";
 import UploadReportsApp from "../../../Pages/Admin/UploadReportsApp/UploadReportsApp";
 import DeleteReports from "../../../Pages/Admin/DeleteReports/DeleteReports";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
-const AdminNavBar = ({ setRefresh, refresh }) => {
-  const HandleAdminClearStorge = (e) => {
-    localStorage.clear();
-    setRefresh(!refresh);
+
+const AdminNavBar = ({ setRefresh, refresh ,setCheckAdminSession}) => {
+  const handleLogout = (e) => {
+    axios
+    .get("http://localhost:7000/api/admin/logout")
+    .then((res) => {
+      console.log(res);
+      if (res.status===200){
+        toast.success(res.data.message);
+        setRefresh(!refresh)
+        setCheckAdminSession(false)
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.warn(err.response.data.message);
+    });
   };
 
   const path = useLocation().pathname;
@@ -82,8 +98,8 @@ const AdminNavBar = ({ setRefresh, refresh }) => {
   };
   const routes = [
     {
-      path: "/Admin",
-      name: "Deshboard",
+      path: path==="/admin"?"/admin":"/Admin/Dashboard",
+      name: "Dashboard",
       icon: <SiHubspot />,
     },
     {
@@ -124,11 +140,23 @@ const AdminNavBar = ({ setRefresh, refresh }) => {
   ];
   return (
     <>
+     <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <nav className="Admin__main_top_nav">
         <div className="Admin__search_bar">
           <div className="Admin__login_button_container">
             <div className="Admin__login">
-              <AiOutlinePoweroff onClick={HandleAdminClearStorge} />
+              <AiOutlinePoweroff onClick={handleLogout} />
             </div>
           </div>
           <div className="Admin__search_icon">
@@ -212,8 +240,8 @@ const AdminNavBar = ({ setRefresh, refresh }) => {
           </section>
         </motion.div>
         <div className="Admin__path__Admin">
-        {path === "/Admin" || path === "/Admin/Deshboard" ? (
-          <Deshboard />
+        {path === "/Admin" || path === "/Admin/Dashboard" ||path === "/admin"  ? (
+          <Dashboard />
         ) : path === "/Admin/Users" ? (
           <Users />
         ) : path === "/Admin/Sites" ? (

@@ -1,12 +1,12 @@
 import React from 'react'
-import "../../../Components/Admin/Admin Deshboard cards/DashboardCards.css"
+import "./DashboardCards.css"
 import {FaEye} from "react-icons/fa"
 import {TbClick} from "react-icons/tb"
 import {FiFramer} from "react-icons/fi"
 import {FiDollarSign} from "react-icons/fi"
 import {motion} from "framer-motion"
 
-const DeshboardCards = () => {
+const DashboardCards = () => {
   return (
     <motion.div
     initial={{width:0}}
@@ -53,4 +53,4 @@ const DeshboardCards = () => {
   ) 
 }
 
-export default DeshboardCards
+export default DashboardCards

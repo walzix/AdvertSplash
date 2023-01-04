@@ -10,9 +10,8 @@ import FormControl from "@mui/material/FormControl";
 import IconButton from "@mui/material/IconButton";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Navigate , useNavigate } from "react-router-dom";
 import axios from "axios";
-// axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true
 
 const AdminLogin = ({ setRefresh, refresh }) => {
   const [userData, setUserData] = useState({
@@ -23,7 +22,6 @@ const AdminLogin = ({ setRefresh, refresh }) => {
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log(name, value);
 
     setUserData(() => {
       return {
@@ -32,7 +30,6 @@ const AdminLogin = ({ setRefresh, refresh }) => {
       };
     });
   };
-  const history = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = userData;
@@ -50,21 +47,19 @@ const AdminLogin = ({ setRefresh, refresh }) => {
         password: userData.password,
       };
       axios
-        .post(process.env.REACT_APP_BASEURL + "/api/admin/login", body)
+        .post(process.env.REACT_APP_BACKEND_URL+"/api/admin/login", body)
         .then((res) => {
           console.log(res);
           toast.success(res.data.message);
           if (res.status == 200) {
-            history.push("/Admin/Deshboard");
+            setRefresh(!refresh)
           }
         })
         .catch((err) => {
           console.log(err);
-          toast.warn(err.response.data.message);
         });
     }
   };
-
   // password hide state
 
   const [showPassword, setShowPassword] = useState(false);

@@ -15,8 +15,8 @@ import { BiUserCircle } from "react-icons/bi";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import logo1 from "../../../assets/logo.png";
 import { useLocation } from "react-router-dom";
-import Deshboard from "../../../Pages/Admin/Deshboard/Deshboard";
-import Users from "../../../Pages/Admin/Users lists/Users";
+import Dashboard from "../../../Pages/Admin/Dashboard/Dashboard";
+import Users from "../../../Pages/Admin/UsersLists/UsersLists";
 import Sites from "../../../Pages/Admin/Sites/Sites";
 import Apps from "../../../Pages/Admin/Apps/Apps";
 import Statistics from "../../../Pages/Admin/Statistics/Statistics";
@@ -28,9 +28,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
-// axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true
 
-const Navbar = ({ setRefresh, refresh }) => {
+const Navbar = ({ setRefresh, refresh,setCheckUserSession }) => {
   const Navigate = useNavigate();
   const handleLogout = (e) => {
     axios
@@ -40,6 +40,7 @@ const Navbar = ({ setRefresh, refresh }) => {
         if (res.status===200){
           toast.success(res.data.message);
           setRefresh(!refresh)
+          setCheckUserSession(false)
         }
       })
       .catch((err) => {
@@ -100,7 +101,7 @@ const Navbar = ({ setRefresh, refresh }) => {
   const routes = [
     {
       path: "/",
-      name: "Deshboard",
+      name: "Dashboard",
       icon: <SiHubspot />,
     },
     {
@@ -244,7 +245,7 @@ const Navbar = ({ setRefresh, refresh }) => {
         </motion.div>
         <div className="path__user">
           {path === "/" || path === "/user" ? (
-            <Deshboard />
+            <Dashboard />
           ) : path === "/User/Users" ? (
             <Users />
           ) : path === "/User/Sites" ? (

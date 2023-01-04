@@ -1,20 +1,20 @@
 import React from "react";
-import "./Deshboard.css";
-import DeshboardCards from "../../../Components/Admin/Admin Deshboard cards/DeshboardCards";
-import SplineChart from "../../../Components/Admin/Admin Deshboard Charts/SplineChart";
+import "./Dashboard.css";
+import DashboardCards from "../../../Components/Admin/DashboardCards/DashboardCards";
+import SplineChart from "../../../Components/Admin/DashboardCharts/SplineChart";
 import { motion } from "framer-motion";
-const Deshboard = () => {
+const Dashboard = () => {
   return (
     <motion.div
       initial={{ width: 0 }}
       animate={{ width: "100%" }}
       exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
     >
-      <div className="Deshboard">
+      <div className="Dashboard">
         <div className="top">
           <div className="top__cards">
             <div>
-              <DeshboardCards />
+              <DashboardCards />
             </div>
           </div>
         </div>
@@ -46,4 +46,4 @@ const Deshboard = () => {
   );
 };
 
-export default Deshboard;
+export default Dashboard;
