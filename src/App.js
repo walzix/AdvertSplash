@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import AdminLogin from "./Pages/Admin/AdminLogin/AdminLogin";
 import UserLogin from "./Pages/User/User Login/UserLogin";
 import UserSignUp from "./Pages/User/User Sign Up/UserSignUp";
@@ -35,6 +35,7 @@ const App = () => {
       })
       .catch((err) => {
         // console.log(err);
+        setAdminLoading(false);
       });
   };
   const checkUserSession = () => {
@@ -51,6 +52,7 @@ const App = () => {
       })
       .catch((err) => {
         // console.log(err);
+        setUserLoading(false);
       });
   };
   function AdminWhole() {
@@ -88,10 +90,8 @@ const App = () => {
       </div>
     );
   }
-  console.log(refresh);
-  console.log(adminSession);
-  function UserWhole() {
 
+  function UserWhole() {
     return (
       <div className="App">
         {!userLoading ? (
@@ -101,8 +101,8 @@ const App = () => {
                 setRefresh={(item) => {
                   setRefresh(item);
                 }}
-                setAdminSession={(item) => {
-                  setAdminSession(item);
+                setUserSession={(item) => {
+                  setUserSession(item);
                 }}
                 refresh={refresh}
               />
@@ -128,7 +128,7 @@ const App = () => {
   }
   useEffect(() => {
     checkAdminSession();
-    checkUserSession()
+    checkUserSession();
   }, [refresh]);
 
   return (
@@ -148,12 +148,11 @@ const App = () => {
           <Route path="/Admin/DeleteReports" element={AdminWhole()} />
           {/* User routes */}
           <Route path="/" element={UserWhole()} />
-          <Route path="/User" element={UserWhole()} />
           <Route path="/UserSignup" element={<UserSignUp />} />
           <Route path="/UserLogin" element={UserWhole()} />
-          <Route path="/User/Users" element={UserWhole()} />
-          <Route path="/User/Sites" element={UserWhole()} />
-          <Route path="/User/Apps" element={UserWhole()} />
+          <Route path="/User" element={UserWhole()} />
+          <Route path="/User/UserApps" element={UserWhole()} />
+          <Route path="/User/UserSites" element={UserWhole()} />
           {/* Error page  */}
           <Route path="*" element={<ErrorPage />} />
         </Routes>

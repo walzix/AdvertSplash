@@ -32,7 +32,7 @@ import axios from "axios";
 const AdminNavBar = ({ setRefresh, refresh ,setAdminSession}) => {
   const handleLogout = (e) => {
     axios
-    .get("http://localhost:7000/api/admin/logout")
+    .get(process.env.REACT_APP_BACKEND_URL+"/api/admin/logout")
     .then((res) => {
       console.log(res);
       if (res.status===200){

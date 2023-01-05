@@ -15,14 +15,9 @@ import { BiUserCircle } from "react-icons/bi";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import logo1 from "../../../assets/logo.png";
 import { useLocation } from "react-router-dom";
-import Dashboard from "../../../Pages/Admin/Dashboard/Dashboard";
-import Users from "../../../Pages/Admin/UsersLists/UsersLists";
-import Sites from "../../../Pages/Admin/Sites/Sites";
-import Apps from "../../../Pages/Admin/Apps/Apps";
-import Statistics from "../../../Pages/Admin/Statistics/Statistics";
-import UploadReports from "../../../Pages/Admin/UploadReports/UploadReports";
-import UploadReportsApp from "../../../Pages/Admin/UploadReportsApp/UploadReportsApp";
-import DeleteReports from "../../../Pages/Admin/DeleteReports/DeleteReports";
+import UserDashboard from "../../../Pages/User/UserDashboard/UserDashboard";
+import UsersApps from "../../../Pages/User/UsersApps/UsersApps";
+import UserSites from "../../../Pages/User/UserSites/UserSites";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -30,24 +25,7 @@ import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 axios.defaults.withCredentials = true
 
-const Navbar = ({ setRefresh, refresh,setCheckUserSession }) => {
-  const Navigate = useNavigate();
-  const handleLogout = (e) => {
-    axios
-      .get("http://localhost:7000/api/users/logout")
-      .then((res) => {
-        console.log(res);
-        if (res.status===200){
-          toast.success(res.data.message);
-          setRefresh(!refresh)
-          setCheckUserSession(false)
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.warn(err.response.data.message);
-      });
-  };
+const Navbar = ({ setRefresh, refresh,setUserSession }) => {
 
   const path = useLocation().pathname;
   console.log(path);
@@ -105,41 +83,32 @@ const Navbar = ({ setRefresh, refresh,setCheckUserSession }) => {
       icon: <SiHubspot />,
     },
     {
-      path: "/User/Users",
-      name: "Users",
+      path: "/User/UserApps",
+      name: "Apps",
       icon: <FiUsers />,
     },
     {
-      path: "/User/Sites",
+      path: "/User/UserSites",
       name: "Sites",
       icon: <CgWebsite />,
     },
-    {
-      path: "/User/Apps",
-      name: "Apps",
-      icon: <IoIosApps />,
-    },
-    {
-      path: "/User/Statistics",
-      name: "Statistics",
-      icon: <BiStats />,
-    },
-    {
-      path: "/User/UploadReports",
-      name: "Upload Reports",
-      icon: <TbFileUpload />,
-    },
-    {
-      path: "/User/UploadReportsApp",
-      name: "Upload Reports App",
-      icon: <HiUpload />,
-    },
-    {
-      path: "/User/DeleteReports",
-      name: "Delete Reports",
-      icon: <TiDocumentDelete />,
-    },
   ];
+  const handleLogout = (e) => {
+    axios
+      .get(process.env.REACT_APP_BACKEND_URL+"/api/users/logout")
+      .then((res) => {
+        console.log(res);
+        if (res.status===200){
+          toast.success(res.data.message);
+          setRefresh(!refresh)
+          setUserSession(false)
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.warn(err.response.data.message);
+      });
+  };
   return (
     <>
       <ToastContainer
@@ -245,21 +214,11 @@ const Navbar = ({ setRefresh, refresh,setCheckUserSession }) => {
         </motion.div>
         <div className="path__user">
           {path === "/" || path === "/user" ? (
-            <Dashboard />
-          ) : path === "/User/Users" ? (
-            <Users />
-          ) : path === "/User/Sites" ? (
-            <Sites />
-          ) : path === "/User/Apps" ? (
-            <Apps />
-          ) : path === "/User/Statistics" ? (
-            <Statistics />
-          ) : path === "/User/UploadReports" ? (
-            <UploadReports />
-          ) : path === "/User/UploadReportsApp" ? (
-            <UploadReportsApp />
-          ) : path === "/User/DeleteReports" ? (
-            <DeleteReports />
+            <UserDashboard />
+          ) : path === "/User/UserApps" ? (
+            <UsersApps />
+          ) : path === "/User/UserSites" ? (
+            <UserSites />
           ) : null}
           {/* <main>{children}</main> */}
         </div>

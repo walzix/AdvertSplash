@@ -1,9 +1,9 @@
 import React from "react";
 import Navbar from "../../Components/User/NavBar/Navbar";
-const User = ({ setRefresh, refresh ,setCheckUserSession}) => {
+const User = ({ setRefresh, refresh ,setUserSession}) => {
   return (
     <div>
-      <Navbar setRefresh={setRefresh} refresh={refresh} setCheckUserSession={setCheckUserSession}/>
+      <Navbar setRefresh={setRefresh} refresh={refresh} setUserSession={setUserSession}/>
     </div>
   );
 };

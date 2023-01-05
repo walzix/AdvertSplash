@@ -21,8 +21,7 @@ const UsersTable = ({ handleOpen, usersData,loading }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  console.log(usersData);
-  const rows = usersData?.map((cur, ind) => {
+  const rows = usersData?.map((cur) => {
     return {
       id:cur._id,
       Emails: cur.email,
@@ -32,134 +31,7 @@ const UsersTable = ({ handleOpen, usersData,loading }) => {
       Action: "",
     };
   });
-  const data = [
-    {
-      id: 1,
-      Emails: "n328k@hotmail.com",
-      firstName: "Jon",
-      TotalSitesApps: "1",
-      Status: true,
-      Action: "",
-    },
-    {
-      id: 2,
-      Emails: "n328k@hotmail.com",
-      firstName: "Cersei",
-      TotalSitesApps: "2",
-      Status: true,
-    },
-    {
-      id: 3,
-      Emails: "n328k@hotmail.com",
-      firstName: "Jaime",
-      TotalSitesApps: "3",
-      Status: true,
-    },
-    {
-      id: 4,
-      Emails: "n328k@hotmail.com",
-      firstName: "Arya",
-      TotalSitesApps: "4",
-      Status: false,
-    },
-    {
-      id: 5,
-      Emails: "n328k@hotmail.com",
-      firstName: "Daenerys",
-      TotalSitesApps: "5",
-      Status: true,
-    },
-    {
-      id: 6,
-      Emails: "n328k@hotmail.com",
-      firstName: null,
-      TotalSitesApps: "6",
-    },
-    {
-      id: 7,
-      Emails: "n328k@hotmail.com",
-      firstName: "Ferrara",
-      TotalSitesApps: "7",
-      Status: true,
-    },
-    {
-      id: 8,
-      Emails: "n328k@hotmail.com",
-      firstName: "Rossini",
-      TotalSitesApps: "8",
-      Status: true,
-    },
-    {
-      id: 9,
-      Emails: "n328k@hotmail.com",
-      firstName: "Harvey",
-      TotalSitesApps: "9",
-      Status: true,
-    },
-    {
-      id: 10,
-      Emails: "n328k@hotmail.com",
-      firstName: "Jon",
-      TotalSitesApps: "1",
-      Status: true,
-      Action: "",
-    },
-    {
-      id: 11,
-      Emails: "n328k@hotmail.com",
-      firstName: "Cersei",
-      TotalSitesApps: "2",
-      Status: true,
-    },
-    {
-      id: 12,
-      Emails: "n328k@hotmail.com",
-      firstName: "Jaime",
-      TotalSitesApps: "3",
-      Status: true,
-    },
-    {
-      id: 13,
-      Emails: "n328k@hotmail.com",
-      firstName: "Arya",
-      TotalSitesApps: "4",
-      Status: false,
-    },
-    {
-      id: 14,
-      Emails: "n328k@hotmail.com",
-      firstName: "Daenerys",
-      TotalSitesApps: "5",
-      Status: true,
-    },
-    {
-      id: 15,
-      Emails: "n328k@hotmail.com",
-      firstName: null,
-      TotalSitesApps: "6",
-    },
-    {
-      id: 16,
-      Emails: "n328k@hotmail.com",
-      firstName: "Ferrara",
-      TotalSitesApps: "7",
-      Status: true,
-    },
-    {
-      id: 17,
-      Emails: "n328k@hotmail.com",
-      firstName: "Rossini",
-      TotalSitesApps: "8",
-      Status: true,
-    },
-    {
-      id: 18,
-      Emails: "n328k@hotmail.com",
-      firstName: "Harvey",
-      TotalSitesApps: "9",
-      Status: true,
-    },
-  ];
+ 
   const columns = [
     {
       field: "firstName",

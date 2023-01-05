@@ -53,7 +53,7 @@ const UserLogin = ({ setRefresh, refresh }) => {
         password: userData.password,
       };
       axios
-        .post("http://localhost:7000/api/users/login", body)
+        .post(process.env.REACT_APP_BACKEND_URL+"/api/users/login", body)
         .then((res) => {
           console.log(res);
           if (res.status === 200) {
