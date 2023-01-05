@@ -29,7 +29,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 
-const AdminNavBar = ({ setRefresh, refresh ,setCheckAdminSession}) => {
+const AdminNavBar = ({ setRefresh, refresh ,setAdminSession}) => {
   const handleLogout = (e) => {
     axios
     .get("http://localhost:7000/api/admin/logout")
@@ -38,7 +38,7 @@ const AdminNavBar = ({ setRefresh, refresh ,setCheckAdminSession}) => {
       if (res.status===200){
         toast.success(res.data.message);
         setRefresh(!refresh)
-        setCheckAdminSession(false)
+        setAdminSession(false)
       }
     })
     .catch((err) => {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../NavBar/Navbar.css";
+import "./Navbar.css";
 import { motion, AnimatePresence } from "framer-motion";
 import { SiHubspot } from "react-icons/si";
 import { FiUsers } from "react-icons/fi";

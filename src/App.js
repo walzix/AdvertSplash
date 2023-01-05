@@ -7,108 +7,136 @@ import UserLogin from "./Pages/User/User Login/UserLogin";
 import UserSignUp from "./Pages/User/User Sign Up/UserSignUp";
 import User from "../src/Pages/User/User";
 import Admin from "./Pages/Admin/Admin";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 import ErrorPage from "./Pages/ErrorPage";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
-const App = (setRefresh, refresh) => {
-  const [loading, setLoading] = React.useState(false);
-  const [userData, setUserData] = React.useState("admin");
-  function AdminWhole() {
-    const [refresh, setRefresh] = React.useState(true);
-    const [checkAdminSession, setCheckAdminSession] = React.useState(false);
+const App = () => {
+  const [refresh, setRefresh] = React.useState(true);
+  const [userData, setUserData] = React.useState();
+  const [adminLoading, setAdminLoading] = React.useState(true);
+  const [userLoading, setUserLoading] = React.useState(true);
+  const [adminSession, setAdminSession] = React.useState(false);
+  const [userSession, setUserSession] = React.useState(false);
+
+  const checkAdminSession = () => {
     axios
       .get(process.env.REACT_APP_BACKEND_URL + "/api/admin/checkAdminSession")
       .then((res) => {
         // console.log(res);
         if (res.status === 200) {
-          setCheckAdminSession(true);
+          setAdminSession(true);
         } else {
-          setCheckAdminSession(false);
+          setAdminSession(false);
         }
+        setAdminLoading(false);
       })
       .catch((err) => {
         // console.log(err);
       });
-    return (
-      <div className="App">
-        {checkAdminSession ? (
-          <>
-            <Admin
-              setRefresh={(item) => {
-                setRefresh(item);
-              }}
-              setCheckAdminSession={(item) => {
-                setCheckAdminSession(item);
-              }}
-              refresh={refresh}
-            />
-          </>
-        ) : (
-          <AdminLogin
-            setRefresh={(item) => {
-              setRefresh(item);
-            }}
-            refresh={refresh}
-          />
-        )}
-      </div>
-    );
-  }
-  function UserWhole() {
-    const [refresh, setRefresh] = React.useState(true);
-    const [checkUserSession, setCheckUserSession] = React.useState(false);
+  };
+  const checkUserSession = () => {
     axios
       .get(process.env.REACT_APP_BACKEND_URL + "/api/users/checkUserSession")
       .then((res) => {
         // console.log(res);
         if (res.status === 200) {
-          setCheckUserSession(true);
+          setUserSession(true);
         } else {
-          setCheckUserSession(false);
+          setUserSession(false);
         }
+        setUserLoading(false);
       })
       .catch((err) => {
         // console.log(err);
       });
+  };
+  function AdminWhole() {
     return (
       <div className="App">
-        {/* {true ? ( */}
-        {checkUserSession ? (
-          <>
-            <User
+        {!adminLoading ? (
+          adminSession ? (
+            <>
+              <Admin
+                setRefresh={(item) => {
+                  setRefresh(item);
+                }}
+                setAdminSession={(item) => {
+                  setAdminSession(item);
+                }}
+                refresh={refresh}
+              />
+            </>
+          ) : (
+            <AdminLogin
               setRefresh={(item) => {
                 setRefresh(item);
               }}
-              setCheckUserSession={(item) => {
-                setCheckUserSession(item);
-              }}
               refresh={refresh}
             />
-          </>
+          )
         ) : (
-          <UserLogin
-            setRefresh={(item) => {
-              setRefresh(item);
-            }}
-            refresh={refresh}
-          />
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={true}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
         )}
       </div>
     );
   }
+  console.log(refresh);
+  console.log(adminSession);
+  function UserWhole() {
+
+    return (
+      <div className="App">
+        {!userLoading ? (
+          userSession ? (
+            <>
+              <User
+                setRefresh={(item) => {
+                  setRefresh(item);
+                }}
+                setAdminSession={(item) => {
+                  setAdminSession(item);
+                }}
+                refresh={refresh}
+              />
+            </>
+          ) : (
+            <UserLogin
+              setRefresh={(item) => {
+                setRefresh(item);
+              }}
+              refresh={refresh}
+            />
+          )
+        ) : (
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={true}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        )}
+      </div>
+    );
+  }
+  useEffect(() => {
+    checkAdminSession();
+    checkUserSession()
+  }, [refresh]);
 
   return (
     <>
       <BrowserRouter>
         <Routes>
           {/* Admin Routes */}
-          <Route
-            path="/AdminLogin"
-            element={AdminWhole()}
-            setRefresh={setRefresh}
-            refresh={refresh}
-          />
+          <Route path="/AdminLogin" element={AdminWhole()} />
           <Route path="/Admin" element={AdminWhole()} />
           <Route path="/Admin/Dashboard" element={AdminWhole()} />
           <Route path="/Admin/Users" element={AdminWhole()} />
@@ -120,12 +148,7 @@ const App = (setRefresh, refresh) => {
           <Route path="/Admin/DeleteReports" element={AdminWhole()} />
           {/* User routes */}
           <Route path="/" element={UserWhole()} />
-          <Route
-            path="/User"
-            element={UserWhole()}
-            setRefresh={setRefresh}
-            refresh={refresh}
-          />
+          <Route path="/User" element={UserWhole()} />
           <Route path="/UserSignup" element={<UserSignUp />} />
           <Route path="/UserLogin" element={UserWhole()} />
           <Route path="/User/Users" element={UserWhole()} />

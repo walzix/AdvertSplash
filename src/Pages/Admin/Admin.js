@@ -1,12 +1,12 @@
 import React from "react";
 import AdminNavBar from "../../Components/Admin/AdminNavBar/AdminNavBar";
-const Admin = ({ setRefresh, refresh, setCheckAdminSession }) => {
+const Admin = ({ setRefresh, refresh, setAdminSession }) => {
   return (
     <div>
       <AdminNavBar
         setRefresh={setRefresh}
         refresh={refresh}
-        setCheckAdminSession={setCheckAdminSession}
+        setAdminSession={setAdminSession}
       />
     </div>
   );
