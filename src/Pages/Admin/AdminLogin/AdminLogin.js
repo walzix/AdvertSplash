@@ -50,8 +50,8 @@ const AdminLogin = ({ setRefresh, refresh }) => {
         .post(process.env.REACT_APP_BACKEND_URL+"/api/admin/login", body)
         .then((res) => {
           console.log(res);
-          toast.success(res.data.message);
           if (res.status == 200) {
+            toast.success(res.data.message);
             setRefresh(!refresh)
           }
         })

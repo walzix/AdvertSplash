@@ -12,22 +12,14 @@ import Box from "@mui/material/Box";
 
 
 const UsersTable = ({ handleOpen, usersData,loading }) => {
-  const [search, setSearch] = useState("");
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+ 
   const rows = usersData?.map((cur) => {
     return {
       id:cur._id,
       Emails: cur.email,
       firstName: cur.fullname,
       TotalSitesApps: "1",
-      Status: true,
+      Status: cur.userStatus,
       Action: "",
     };
   });
@@ -54,8 +46,8 @@ const UsersTable = ({ handleOpen, usersData,loading }) => {
       headerName: "Status",
       renderCell: (user) => (
         <>
-          {user.row.Status === true ? (
-            <div className="Active">Active</div>
+          {user.row.Status === "Registered"||user.row.Status==="Active" ? (
+            <div className="Active">{user.row.Status}</div>
           ) : (
             <div className="not_active">Not Active</div>
           )}
@@ -69,36 +61,17 @@ const UsersTable = ({ handleOpen, usersData,loading }) => {
       editable: false,
       renderCell: (user) => (
         <>
-          <div>
-            <Button
+        {user.row.Status==="Registered"?
+        <Button
               id="demo-positioned-button"
-              aria-controls={open ? "demo-positioned-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
+             
+              // onClick={handleApi}
             >
-              Actions
-              <MdOutlineKeyboardArrowDown />
+              Suspend
             </Button>
-            <Menu
-              id="demo-positioned-menu"
-              aria-labelledby="demo-positioned-button"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-            >
-              <MenuItem onClick={handleClose}>Edit</MenuItem>
-              <MenuItem onClick={handleClose}>Admin Login</MenuItem>
-            </Menu>
-          </div>
+            :null
+        }
+         
         </>
       ),
     },

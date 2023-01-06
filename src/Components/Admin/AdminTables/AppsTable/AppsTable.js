@@ -10,93 +10,36 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 const AppsTable = ({ appsData }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
 
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   const columns = [
     {
       field: "AppName",
       headerName: "App Name",
-      width: 330,
+      flex: 1,
     },
     {
       field: "User",
       headerName: "user",
-      width: 170,
+      flex: 1,
     },
     {
       field: "AppLink",
       headerName: "App Link",
-      width: 330,
+      flex: 1,
     },
     {
-      field: "Status",
-      headerName: "Status",
-      width: 180,
-      renderCell: (user) => (
-        <>
-          {user.row.Status === true ? (
-            <div className="Active">Active</div>
-          ) : (
-            <div className="not_active">Not Active</div>
-          )}
-        </>
-      ),
+      field: "Type",
+      headerName: "Type",
+      flex: 1,
     },
-    {
-      field: "Action",
-      headerName: "Action",
-      width: 130,
-      editable: false,
-      renderCell: (user) => (
-        <>
-          <div>
-            <Button
-              id="demo-positioned-button"
-              aria-controls={open ? "demo-positioned-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-            >
-              Actions
-              <MdOutlineKeyboardArrowDown />
-            </Button>
-            <Menu
-              id="demo-positioned-menu"
-              aria-labelledby="demo-positioned-button"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-            >
-              <MenuItem onClick={handleClose}>Edit</MenuItem>
-              <MenuItem onClick={handleClose}>Remove User</MenuItem>
-              <MenuItem onClick={handleClose}>Update App Status</MenuItem>
-            </Menu>
-          </div>
-        </>
-      ),
-    },
+    
   ];
   const rows = appsData?.map((cur) => {
     return {
       id: cur._id,
       AppLink: cur.appComID,
       AppName: cur.appName,
-      Status: cur._id,
+      Type: cur.appType,
       User: cur.clientEmail,
     };
   });
