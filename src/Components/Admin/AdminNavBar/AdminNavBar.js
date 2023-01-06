@@ -48,7 +48,6 @@ const AdminNavBar = ({ setRefresh, refresh ,setAdminSession}) => {
   };
 
   const path = useLocation().pathname;
-  console.log(path);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenSearch, setIsOpenSearch] = useState(false);
   const toggle = () => setIsOpen(!isOpen);

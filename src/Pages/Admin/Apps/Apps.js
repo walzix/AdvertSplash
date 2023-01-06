@@ -26,6 +26,13 @@ const style = {
 const Apps = () => {
   const [refresh, setRefresh] = useState(true)
   const [appsData, setAppsData] = useState()
+  const [addApps, setAddApps] = useState({
+    appName: "",
+    appComID: "",
+    appType: "",
+    clientEmail: "",
+    appNiche: ""
+  })
   const [openAppModal, setopenAppModal] = React.useState(false);
 
   const handlemodalOpen = () => setopenAppModal(true);
