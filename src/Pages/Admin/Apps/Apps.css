@@ -1,15 +1,17 @@
 .Apps__AddApps_download__container {
+  margin: 20px;
+  font-weight: 600;
+  width: 90%;
+  margin: 0 auto;
+}
+.AddApps__btn__heading__container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px;
-  font-weight: 600;
- 
+  margin-bottom: 20px;
 }
 .AddApps__btn____Apps__Download__btn___container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 10px;
 }
 .AddApps__btn {
@@ -23,10 +25,10 @@
   border: none;
   border-radius: 5px;
   gap: 10px;
+  cursor: pointer;
 }
 .Apps__Download__btn {
-  display: flex
-  ;
+  display: flex;
   justify-content: center;
   align-items: center;
   width: 180px;
@@ -36,18 +38,19 @@
   border: none;
   border-radius: 5px;
   gap: 10px;
+  cursor: pointer;
 }
-.Add__app_Icon{
-    font-size: 20px;
+.Add__app_Icon {
+  font-size: 20px;
 }
-.apps__download__Icon{
-    font-size: 20px;
+.apps__download__Icon {
+  font-size: 20px;
 }
-.textFieldApp__Form{
+.textFieldApp__Form {
   margin: 20px;
   width: 100%;
 }
-.add__Apps__text_field__btn{
+.add__Apps__text_field__btn {
   width: 25%;
   height: 40px;
   color: white;
@@ -56,12 +59,11 @@
   border: none;
   cursor: pointer;
 }
-.mob__App_top{
+.mob__App_top {
   width: 100%;
   text-align: left;
 }
-.Apps__table__container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.Add__apps__modal{
+  width: 70%;
 }
+

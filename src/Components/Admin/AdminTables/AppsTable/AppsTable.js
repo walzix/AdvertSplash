@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-import "./UsersTable.css";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { Button } from "@mui/material";
-import Menu from "@mui/material/Menu";
-import { AiOutlineUserAdd } from "react-icons/ai";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import MenuItem from "@mui/material/MenuItem";
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
+import "./AppsTable.css";
+import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
+import { Button } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
-
-const UsersTable = ({ handleOpen, usersData,loading }) => {
-  const [search, setSearch] = useState("");
+const AppsTable = ({ appsData }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -21,37 +19,26 @@ const UsersTable = ({ handleOpen, usersData,loading }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const rows = usersData?.map((cur) => {
-    return {
-      id:cur._id,
-      Emails: cur.email,
-      firstName: cur.fullname,
-      TotalSitesApps: "1",
-      Status: true,
-      Action: "",
-    };
-  });
- 
   const columns = [
     {
-      field: "firstName",
-      headerName: "First name",
-      flex: 1,
+      field: "AppName",
+      headerName: "App Name",
+      width: 330,
     },
     {
-      field: "Emails",
-      headerName: "Emails",
-      flex: 1,
+      field: "User",
+      headerName: "user",
+      width: 170,
     },
     {
-      field: "TotalSitesApps",
-      headerName: "Total Sites / Apps",
-      flex: 1,
+      field: "AppLink",
+      headerName: "App Link",
+      width: 330,
     },
     {
-      flex: 1,
       field: "Status",
       headerName: "Status",
+      width: 180,
       renderCell: (user) => (
         <>
           {user.row.Status === true ? (
@@ -63,9 +50,9 @@ const UsersTable = ({ handleOpen, usersData,loading }) => {
       ),
     },
     {
-      flex: 1,
       field: "Action",
       headerName: "Action",
+      width: 130,
       editable: false,
       renderCell: (user) => (
         <>
@@ -96,30 +83,28 @@ const UsersTable = ({ handleOpen, usersData,loading }) => {
               }}
             >
               <MenuItem onClick={handleClose}>Edit</MenuItem>
-              <MenuItem onClick={handleClose}>Admin Login</MenuItem>
+              <MenuItem onClick={handleClose}>Remove User</MenuItem>
+              <MenuItem onClick={handleClose}>Update App Status</MenuItem>
             </Menu>
           </div>
         </>
       ),
     },
   ];
+  const rows = appsData?.map((cur) => {
+    return {
+      id: cur._id,
+      AppLink: cur.appComID,
+      AppName: cur.appName,
+      Status: cur._id,
+      User: cur.clientEmail,
+    };
+  });
 
   return (
-    <>
-    <div className="users__table__container">
-      <div className="Users_Head_btn">
-        <div>USERS</div>
-        <div className="Add_download_btns">
-          <button className="Add_sites_btn" onClick={handleOpen}>
-            {" "}
-            <AiOutlineUserAdd className="Add_icon" /> ADD USERS{" "}
-          </button>
-        </div>
-      </div>
-
-    {usersData?
-      <div className="table__contine">
-        <Box sx={{ height: 400, width: "95%" }}>
+    <div className="Apps__table__container">
+      {appsData ? (
+        <Box sx={{ height: 400, width: "100%" }}>
           <DataGrid
             rows={rows}
             columns={columns}
@@ -129,15 +114,16 @@ const UsersTable = ({ handleOpen, usersData,loading }) => {
             experimentalFeatures={{ newEditingApi: true }}
           />
         </Box>
-      </div>
-    :  <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={true}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>}
+      ) : (
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={true}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
     </div>
-    </>
   );
 };
-export default UsersTable;
+
+export default AppsTable;
