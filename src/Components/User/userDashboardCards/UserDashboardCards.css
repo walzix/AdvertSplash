@@ -1,0 +1,39 @@
+.UserDashboard_Cards {
+  width: 100%;
+  padding: 10px ;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.User__Cards {
+  background-color: #252e58;
+  margin: 5px;
+  width: 23%;
+  height: 30%;
+  color: white;
+  border-radius: 10px;
+}
+.card_content_Container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.cards_logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 70px;
+}
+.Cards__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100px;
+}
+.cards__heading {
+}
+.Cards__counts {
+  font-weight: 500;
+  font-size: 40px;
+}
