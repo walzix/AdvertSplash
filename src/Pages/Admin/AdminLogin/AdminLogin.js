@@ -8,12 +8,14 @@ import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import IconButton from "@mui/material/IconButton";
+import LoadingButton from "@mui/lab/LoadingButton";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true;
 
 const AdminLogin = ({ setRefresh, refresh }) => {
+  const [loadingBtn, setLoadingBtn] = useState(false);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -46,17 +48,22 @@ const AdminLogin = ({ setRefresh, refresh }) => {
         email: userData.email,
         password: userData.password,
       };
+      setLoadingBtn(true);
       axios
-        .post(process.env.REACT_APP_BACKEND_URL+"/api/admin/login", body)
+        .post(process.env.REACT_APP_BACKEND_URL + "/api/admin/login", body)
         .then((res) => {
           console.log(res);
           if (res.status == 200) {
             toast.success(res.data.message);
-            setRefresh(!refresh)
+            setTimeout(() => {
+              setRefresh(!refresh);
+              setLoadingBtn(false);
+            }, 3000);
           }
         })
         .catch((err) => {
           console.log(err);
+          setLoadingBtn(false);
         });
     }
   };
@@ -86,9 +93,9 @@ const AdminLogin = ({ setRefresh, refresh }) => {
       />
       {/* Same as */}
       <ToastContainer />
-          <form onSubmit={handleSubmit}>
-      <div className="login_form">
-        <div className="right__form__container">
+      <form onSubmit={handleSubmit}>
+        <div className="login_form">
+          <div className="right__form__container">
             <div className=" Admin_Login">Admin Login</div>
             <div>
               <TextField
@@ -131,14 +138,18 @@ const AdminLogin = ({ setRefresh, refresh }) => {
               </FormControl>
             </div>
             <div>
-              <button className="Admin__btn__Login" type="submit">
-                Login
-              </button>
+              <LoadingButton
+                loading={loadingBtn}
+                variant="outlined"
+                type="submit"
+              >
+                Submit
+              </LoadingButton>
             </div>
-          <span>Forgot Your Passward ?</span>
+            <span>Forgot Your Password?</span>
+          </div>
         </div>
-      </div>
-          </form>
+      </form>
     </>
   );
 };

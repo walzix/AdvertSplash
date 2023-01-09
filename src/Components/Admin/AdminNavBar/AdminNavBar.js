@@ -190,7 +190,7 @@ const AdminNavBar = ({ setRefresh, refresh ,setAdminSession}) => {
             transition: {
               duration: 0.5,
               type: "spring",
-              damping: 7,
+              damping: 10,
             },
           }}
           className="Admin__sidebar"
@@ -238,7 +238,15 @@ const AdminNavBar = ({ setRefresh, refresh ,setAdminSession}) => {
             ))}
           </section>
         </motion.div>
-        <div className="Admin__path__Admin">
+        <motion.div className="Admin__path__Admin"  
+        animate={{
+            marginLeft: isOpen ? "260px" : "55px",
+            transition: {
+              duration: 0.5,
+              type: "spring",
+              damping: 10,
+            },
+          }}>
         {path === "/Admin" || path === "/Admin/Dashboard" ||path === "/admin"  ? (
           <Dashboard />
         ) : path === "/Admin/Users" ? (
@@ -257,7 +265,7 @@ const AdminNavBar = ({ setRefresh, refresh ,setAdminSession}) => {
           <DeleteReports />
         ) : null}
         {/* <main>{children}</main> */}
-        </div>
+        </motion.div>
       </div>
     </>
   );

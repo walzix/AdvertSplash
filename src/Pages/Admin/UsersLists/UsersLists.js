@@ -18,6 +18,7 @@ const UsersLists = () => {
     boxShadow: 24,
     p: 4,
   };
+  const [refresh, setRefresh] = useState(false);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [usersData, setUsersData] = useState();
@@ -25,13 +26,13 @@ const UsersLists = () => {
   const handleClose = () => setOpen(false);
 
   const getAllUsers = () => {
-    setLoading(true)
+    setLoading(true);
     axios
       .post(process.env.REACT_APP_BACKEND_URL + "/api/users/getAll")
       .then((res) => {
         console.log(res);
-        setUsersData(res.data.data)
-        setLoading(false)
+        setUsersData(res.data.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -39,17 +40,21 @@ const UsersLists = () => {
   };
   useEffect(() => {
     getAllUsers();
-  }, []);
+  }, [refresh]);
 
-  
   return (
-   
     <motion.div
       initial={{ width: 0 }}
       animate={{ width: "100%" }}
       exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
     >
-      <UsersTable handleOpen={handleOpen} usersData={usersData} loading={loading}/>
+      <UsersTable
+        handleOpen={handleOpen}
+        usersData={usersData}
+        refresh={refresh}
+        setRefresh={setRefresh}
+        setLoading={setLoading}
+      />
       <div>
         <Modal
           open={open}
@@ -126,7 +131,6 @@ const UsersLists = () => {
         </Modal>
       </div>
     </motion.div>
-  
   );
 };
 
