@@ -4,11 +4,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SiHubspot } from "react-icons/si";
 import { FiUsers } from "react-icons/fi";
 import { CgWebsite } from "react-icons/cg";
-import { IoIosApps } from "react-icons/io";
+import { AiOutlineAppstore } from "react-icons/ai";
 import { BiStats } from "react-icons/bi";
 import { TbFileUpload } from "react-icons/tb";
 import { HiUpload } from "react-icons/hi";
 import { TiDocumentDelete } from "react-icons/ti";
+import { IoApps } from "react-icons/io";
 import { FaBars } from "react-icons/fa";
 import { BsSearch } from "react-icons/bs";
 import { BiUserCircle } from "react-icons/bi";
@@ -83,15 +84,16 @@ const Navbar = ({ setRefresh, refresh,setUserSession }) => {
       icon: <SiHubspot />,
     },
     {
-      path: "/User/UserApps",
-      name: "Apps",
-      icon: <FiUsers />,
-    },
-    {
       path: "/User/UserSites",
       name: "Sites",
       icon: <CgWebsite />,
     },
+    {
+      path: "/User/UserApps",
+      name: "Apps",
+      icon: <AiOutlineAppstore />,
+    },
+    
   ];
   const handleLogout = (e) => {
     axios

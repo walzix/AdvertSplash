@@ -14,11 +14,12 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
+import LoadingButton from "@mui/lab/LoadingButton";
 // axios.defaults.withCredentials = true;
 
 const UserLogin = ({ setRefresh, refresh }) => {
   const secure = window.location.protocol === "https";
-
+  const [loadingBtn, setLoadingBtn] = useState(false);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -52,18 +53,22 @@ const UserLogin = ({ setRefresh, refresh }) => {
         email: userData.email,
         password: userData.password,
       };
+      setLoadingBtn(true);
       axios
-        .post(process.env.REACT_APP_BACKEND_URL+"/api/users/login", body)
+        .post(process.env.REACT_APP_BACKEND_URL + "/api/users/login", body)
         .then((res) => {
           console.log(res);
           if (res.status === 200) {
             toast.success(res.data.message);
-            setRefresh(!refresh);
+            setTimeout(() => {
+              setRefresh(!refresh);
+              setLoadingBtn(false);
+            }, 3000);
           }
         })
         .catch((err) => {
           console.log(err);
-          toast.warn(err.response.data.message);
+          setLoadingBtn(false);
         });
     }
   };
@@ -93,7 +98,7 @@ const UserLogin = ({ setRefresh, refresh }) => {
       />
       {/* Same as */}
       <ToastContainer />
-      <div className="User__right__form__container">
+      <form onSubmit={handleSubmit} className="User__right__form__container">
         <div className=" User_Login">User Login</div>
         <div>
           <TextField
@@ -104,6 +109,7 @@ const UserLogin = ({ setRefresh, refresh }) => {
             sx={{ m: 1, width: "35ch" }}
             label="@Email"
             variant="outlined"
+            required
           />
         </div>
         <div>
@@ -114,6 +120,8 @@ const UserLogin = ({ setRefresh, refresh }) => {
             <OutlinedInput
               onChange={handleChange}
               value={userData.password}
+              autoComplete="false"
+              required
               name="password"
               id="password"
               type={showPassword ? "text" : "password"}
@@ -134,15 +142,15 @@ const UserLogin = ({ setRefresh, refresh }) => {
           </FormControl>
         </div>
         <div>
-          <button className="User__btn__Login" onClick={handleSubmit}>
+          <LoadingButton loading={loadingBtn} variant="outlined" type="submit">
             Login
-          </button>
+          </LoadingButton>
         </div>
         <NavLink to="/UserSignUp">
           <span>Sign up</span>
         </NavLink>
         <span>Forgot Your Passward?</span>
-      </div>
+      </form>
     </div>
   );
 };

@@ -74,7 +74,7 @@ main {
   height: 110vh;
   background-color: #252e58;
   color: white;
-  position: relative;
+  position: sticky;
   z-index: 1;
   left: 0;
   overflow-x: hidden;

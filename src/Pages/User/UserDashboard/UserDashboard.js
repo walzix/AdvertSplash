@@ -20,7 +20,7 @@ const UserDashboard = () => {
       </div>
       <div className="div3">
         <UserDashboardChart />
-      </div>
+      </div> 
     </motion.div>
   );
 };

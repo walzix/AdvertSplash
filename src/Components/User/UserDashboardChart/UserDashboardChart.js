@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
+import "./UserDashboardChart.css"
 const UserDashboardChart = () => {
     const [SplineCharts, setSplineChart] = useState({
         series: [
@@ -43,12 +44,12 @@ const UserDashboardChart = () => {
         },
       });
   return (
-    <div>
+    <div className="UserDashboardChart">
       <ReactApexChart
         options={SplineCharts.options}
         series={SplineCharts.series}
         type="area"
-        width={1040}
+        width={"100%"}
         height={390}
       />
     </div>
