@@ -32,19 +32,21 @@ const UsersTable = ({
   setLoading,
 }) => {
   const [open, setOpen] = React.useState(false);
-  const [email, setEmail] = React.useState("");
+  // const [email, setEmail] = React.useState("");
 
-  const handleApi = (api) => {
+  const handleApi = (api,email) => {
     setLoading(true);
+    const body={email:email}
+    console.log(body);
     axios
-      .post(process.env.REACT_APP_BACKEND_URL + `/api/users/${api}`, email)
+      .post(process.env.REACT_APP_BACKEND_URL + `/api/users/${api}`,body) 
       .then((res) => {
         console.log(res);
         if (res.status == 200) {
           toast.success(res.data.message);
           setLoading(false);
           setRefresh(!refresh);
-          setEmail("");
+          // setEmail("");
         }
       })
       .catch((err) => {
@@ -52,7 +54,6 @@ const UsersTable = ({
         setLoading(false);
       });
   };
-  console.log(email);
   const rows = usersData?.map((cur) => {
     return {
       id: cur._id,
@@ -106,8 +107,7 @@ const UsersTable = ({
               size="small"
               variant="contained"
               onClick={() => {
-                handleApi("suspendUser");
-                setEmail(user.row.Email);
+                handleApi("suspendUser",user.row.Email);
               }}
             >
               Suspend
@@ -117,8 +117,7 @@ const UsersTable = ({
               size="small"
               variant="contained"
               onClick={() => {
-                handleApi("restoreUser");
-                setEmail(user.row.Email);
+                handleApi("restoreUser",user.row.Email);
               }}
             >
               Active
@@ -128,8 +127,7 @@ const UsersTable = ({
               size="small"
               variant="contained"
               onClick={() => {
-                handleApi("approveUser");
-                setEmail(user.row.Email);
+                handleApi("approveUser",user.row.Email);
               }}
             >
               Approve
@@ -141,7 +139,7 @@ const UsersTable = ({
             variant="contained"
             onClick={() => {
               setOpen(true);
-              setEmail(user.row.Email);
+              // setEmail(user.row.Email);
             }}
           >
             Delete
