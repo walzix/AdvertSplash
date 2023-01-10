@@ -32,12 +32,12 @@ const UsersTable = ({
   setLoading,
 }) => {
   const [open, setOpen] = React.useState(false);
-  // const [email, setEmail] = React.useState("");
+  const [delEmail, setDelEmail] = React.useState("");
 
   const handleApi = (api,email) => {
     setLoading(true);
     const body={email:email}
-    console.log(body);
+    console.log("func"+delEmail);
     axios
       .post(process.env.REACT_APP_BACKEND_URL + `/api/users/${api}`,body) 
       .then((res) => {
@@ -46,14 +46,16 @@ const UsersTable = ({
           toast.success(res.data.message);
           setLoading(false);
           setRefresh(!refresh);
-          // setEmail("");
+          setDelEmail("");
+          setOpen(false)
         }
       })
       .catch((err) => {
-        console.log();
+        console.log(err);
         setLoading(false);
       });
   };
+  console.log(delEmail);
   const rows = usersData?.map((cur) => {
     return {
       id: cur._id,
@@ -106,6 +108,7 @@ const UsersTable = ({
             <Button
               size="small"
               variant="contained"
+              color="error"
               onClick={() => {
                 handleApi("suspendUser",user.row.Email);
               }}
@@ -116,16 +119,18 @@ const UsersTable = ({
             <Button
               size="small"
               variant="contained"
+              color="success"
               onClick={() => {
                 handleApi("restoreUser",user.row.Email);
               }}
             >
-              Active
+              Restore
             </Button>
             ): user.row.Status === "Registered" ?( 
               <Button
               size="small"
               variant="contained"
+              color="success"
               onClick={() => {
                 handleApi("approveUser",user.row.Email);
               }}
@@ -139,7 +144,7 @@ const UsersTable = ({
             variant="contained"
             onClick={() => {
               setOpen(true);
-              // setEmail(user.row.Email);
+              setDelEmail(user.row.Email);
             }}
           >
             Delete
@@ -150,19 +155,17 @@ const UsersTable = ({
             keepMounted
             aria-describedby="alert-dialog-slide-description"
           >
-            <DialogTitle>{"User delete permanently?"}</DialogTitle>
+            <DialogTitle  color="error">{"User delete permanently?"}</DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-slide-description">
-                Let Google help apps determine location. This means sending
-                anonymous location data to Google, even when no apps are
-                running.
+              If you delete this user then it will be deleted permanently.
               </DialogContentText>
             </DialogContent>
             <DialogActions>
               <Button onClick={() => setOpen(false)}>Cancel</Button>
               <Button
                 color="error"
-                onClick={() => handleApi("deleteUser_admin")}
+                onClick={() => handleApi("deleteUser_admin",delEmail)}
               >
                 Delete
               </Button>
