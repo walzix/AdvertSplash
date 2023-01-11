@@ -78,7 +78,7 @@
   align-items: center;
 }
 .UserTable__btn__container {
-    width: 100%;
+  width: 100%;
   display: flex;
- justify-content: space-between;
+  justify-content: space-between;
 }

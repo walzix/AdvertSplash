@@ -9,19 +9,30 @@ const UserSites = () => {
       field: "STATUS",
       headerName: "STATUS",
       width: 160,
+      renderCell: (User) =>(
+        <>
+      {User.row.status === true ? (
+
+          <div className='Sites__Active'>Active</div> 
+      ) : (
+        <div className='Sites__Stopped'>Stopped</div>
+      )
+    }
+        </>
+      )
     },
   ];
 
   const rows = [
-    { id: 1, AppURL: "Snow", AppName: "Jon", STATUS: 35 },
-    { id: 2, AppURL: "Lannister", AppName: "Cersei", STATUS: 42 },
-    { id: 3, AppURL: "Lannister", AppName: "Jaime", STATUS: 45 },
-    { id: 4, AppURL: "Stark", AppName: "Arya", STATUS: 16 },
-    { id: 5, AppURL: "Targaryen", AppName: "Daenerys", STATUS: null },
-    { id: 6, AppURL: "Melisandre", AppName: null, STATUS: 150 },
-    { id: 7, AppURL: "Clifford", AppName: "Ferrara", STATUS: 44 },
-    { id: 8, AppURL: "Frances", AppName: "Rossini", STATUS: 36 },
-    { id: 9, AppURL: "Roxie", AppName: "Harvey", STATUS: 65 },
+    { id: 1, AppURL: "Snow", AppName: "Jon", status : false },
+    { id: 2, AppURL: "Lannister", AppName: "Cersei", status : true },
+    { id: 3, AppURL: "Lannister", AppName: "Jaime", status : false },
+    { id: 4, AppURL: "Stark", AppName: "Arya", status : true },
+    { id: 5, AppURL: "Targaryen", AppName: "Daenerys", status : false },
+    { id: 6, AppURL: "Melisandre", AppName: null, status : true },
+    { id: 7, AppURL: "Clifford", AppName: "Ferrara", status : false },
+    { id: 8, AppURL: "Frances", AppName: "Rossini", status : true },
+    { id: 9, AppURL: "Roxie", AppName: "Harvey", status : false },
   ];
   return (
     <div className='UserSites__container'>

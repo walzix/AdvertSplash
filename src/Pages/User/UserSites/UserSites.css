@@ -3,3 +3,23 @@
     justify-content: center;
     align-items: center;
 }
+.Sites__Active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    background-color: #3cb371;
+    color: white;
+    border-radius: 5px;
+  }
+.Sites__Stopped {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+  }
