@@ -49,7 +49,7 @@ const UserDashboardChart = () => {
         options={SplineCharts.options}
         series={SplineCharts.series}
         type="area"
-        width={"1030"}
+        width={"100%"}
         height={390}
       />
     </div>
