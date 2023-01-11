@@ -54,11 +54,9 @@ const AdminLogin = ({ setRefresh, refresh }) => {
         .then((res) => {
           console.log(res);
           if (res.status == 200) {
-            toast.success(res.data.message);
-            setTimeout(() => {
-              setRefresh(!refresh);
-              setLoadingBtn(false);
-            }, 3000);
+            // toast.success(res.data.message);
+            setRefresh(!refresh);
+            setLoadingBtn(false);
           }
         })
         .catch((err) => {
@@ -97,9 +95,9 @@ const AdminLogin = ({ setRefresh, refresh }) => {
         <div className="login_form">
           <div className="right__form__container">
             <div className=" Admin_Login">Admin Login</div>
-            <div>
+            <div className="right__form__container__textfield">
               <TextField
-                sx={{ m: 1, width: "35ch" }}
+                fullWidth
                 id="outlined-basic"
                 onChange={handleChange}
                 value={userData.email}
@@ -109,8 +107,8 @@ const AdminLogin = ({ setRefresh, refresh }) => {
                 required
               />
             </div>
-            <div>
-              <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
+            <div className="right__form__container__textfield">
+              <FormControl fullWidth variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">
                   Password
                 </InputLabel>
@@ -121,6 +119,7 @@ const AdminLogin = ({ setRefresh, refresh }) => {
                   id="password"
                   type={showPassword ? "text" : "password"}
                   required
+                  fullWidth
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -137,13 +136,14 @@ const AdminLogin = ({ setRefresh, refresh }) => {
                 />
               </FormControl>
             </div>
-            <div>
+            <div className="right__form__container__textfield">
               <LoadingButton
+                fullWidth
                 loading={loadingBtn}
-                variant="outlined"
+                variant="contained"
                 type="submit"
               >
-                Submit
+                Login
               </LoadingButton>
             </div>
             <span>Forgot Your Password?</span>

@@ -12,14 +12,29 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
 import axios from "axios";
-import Cookies from "js-cookie";
+import Modal from "@mui/material/Modal";
 import LoadingButton from "@mui/lab/LoadingButton";
-// axios.defaults.withCredentials = true;
+import { Button } from "@mui/material";
+axios.defaults.withCredentials = true;
 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 const UserLogin = ({ setRefresh, refresh }) => {
   const secure = window.location.protocol === "https";
   const [loadingBtn, setLoadingBtn] = useState(false);
+  const [forgotPass, setForgotPass] = useState("");
+  const [loadingBtnForPass, setLoadingBtnForPass] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -35,7 +50,7 @@ const UserLogin = ({ setRefresh, refresh }) => {
       };
     });
   };
-  const history = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = userData;
@@ -59,16 +74,44 @@ const UserLogin = ({ setRefresh, refresh }) => {
         .then((res) => {
           console.log(res);
           if (res.status === 200) {
-            toast.success(res.data.message);
-            setTimeout(() => {
-              setRefresh(!refresh);
-              setLoadingBtn(false);
-            }, 3000);
+            // toast.success(res.data.message);
+            setRefresh(!refresh);
+            setLoadingBtn(false);
           }
         })
         .catch((err) => {
           console.log(err);
           setLoadingBtn(false);
+        });
+    }
+  };
+  const handleForgotEmailSubmit = (e) => {
+    e.preventDefault();
+
+    if (forgotPass === "") {
+      toast.warn("Please Enter Your Email");
+    } else {
+      let body = {
+        email: forgotPass,
+      };
+      setLoadingBtnForPass(true);
+      axios
+        .post(
+          process.env.REACT_APP_BACKEND_URL +
+            "/api/users/requestForgotPassword",
+          body
+        )
+        .then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            toast.success(res.data.message);
+            // setRefresh(!refresh);
+            setLoadingBtnForPass(false);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoadingBtnForPass(false);
         });
     }
   };
@@ -100,21 +143,21 @@ const UserLogin = ({ setRefresh, refresh }) => {
       <ToastContainer />
       <form onSubmit={handleSubmit} className="User__right__form__container">
         <div className=" User_Login">User Login</div>
-        <div>
+        <div className="User__right__form__container__textfield">
           <TextField
             onChange={handleChange}
             value={userData.username}
             name="email"
             id="email"
-            sx={{ m: 1, width: "35ch" }}
+            fullWidth
             label="@Email"
             variant="outlined"
             required
           />
         </div>
-        <div>
-          <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">
+        <div className="User__right__form__container__textfield">
+          <FormControl fullWidth variant="outlined">
+            <InputLabel fullWidth htmlFor="outlined-adornment-password">
               Password
             </InputLabel>
             <OutlinedInput
@@ -124,6 +167,7 @@ const UserLogin = ({ setRefresh, refresh }) => {
               required
               name="password"
               id="password"
+              fullWidth
               type={showPassword ? "text" : "password"}
               endAdornment={
                 <InputAdornment position="end">
@@ -141,16 +185,63 @@ const UserLogin = ({ setRefresh, refresh }) => {
             />
           </FormControl>
         </div>
-        <div>
-          <LoadingButton loading={loadingBtn} variant="outlined" type="submit">
+        <div className="User__right__form__container__textfield">
+          <LoadingButton
+            fullWidth
+            loading={loadingBtn}
+            variant="contained"
+            type="submit"
+          >
             Login
           </LoadingButton>
         </div>
         <NavLink to="/UserSignUp">
           <span>Sign up</span>
         </NavLink>
-        <span>Forgot Your Passward?</span>
+        <div className="UserLogin__forgotPas" onClick={() => setOpen(true)}>
+          Forgot Your Password?
+        </div>
       </form>
+      <Modal
+        open={open}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style} className="UserLogin__modal">
+          <form onSubmit={handleForgotEmailSubmit}>
+            <div className="UserLogin__modal__heading">Enter Email</div>
+            <div className="UserLogin__modal__textfield">
+              <TextField
+                onChange={(e) => setForgotPass(e.target.value)}
+                value={forgotPass}
+                name="email"
+                id="email"
+                fullWidth
+                label="@Email"
+                variant="outlined"
+                required
+              />
+            </div>
+            <div className="UserLogin__modal__btn_container">
+              <Button
+                variant="contained"
+                color="error"
+                onClick={() => setOpen(false)}
+              >
+                Cancel
+              </Button>
+
+              <LoadingButton
+                loading={loadingBtnForPass}
+                variant="contained"
+                type="submit"
+              >
+                Submit
+              </LoadingButton>
+            </div>
+          </form>
+        </Box>
+      </Modal>
     </div>
   );
 };

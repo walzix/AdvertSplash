@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./AppsTable.css";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
@@ -10,7 +10,6 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 const AppsTable = ({ appsData }) => {
-
   const columns = [
     {
       field: "AppName",
@@ -32,7 +31,6 @@ const AppsTable = ({ appsData }) => {
       headerName: "Type",
       flex: 1,
     },
-    
   ];
   const rows = appsData?.map((cur) => {
     return {
@@ -55,6 +53,7 @@ const AppsTable = ({ appsData }) => {
             rowsPerPageOptions={[5]}
             disableSelectionOnClick
             experimentalFeatures={{ newEditingApi: true }}
+            components={{ Toolbar: GridToolbar }}
           />
         </Box>
       ) : (

@@ -43,15 +43,58 @@ import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 axios.defaults.withCredentials = true;
-
+const inputAnimation = {
+  hidden: {
+    width: 0,
+    padding: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      type: "spring",
+      damping: 20,
+    },
+  },
+  show: {
+    width: "200px",
+    height: "35px",
+    padding: "5px 15px",
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      type: "spring",
+      damping: 10,
+    },
+  },
+};
+const showAnimation = {
+  hidden: {
+    width: 0,
+    opacity: 0,
+    transition: {
+      duration: 0.5,
+      type: "spring",
+      damping: 10,
+    },
+  },
+  show: {
+    width: "auto",
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      type: "spring",
+      damping: 8,
+    },
+  },
+};
 const Navbar = ({ setRefresh, refresh, setUserSession }) => {
   const path = useLocation().pathname;
   console.log(path);
-  const [passwordData, setpasswordData] = useState({
-    Currentassword:"",
-    NewPassword:""
-  })
-  const [loadingBtn, setloadingBtn] = useState(false);
+  const [changePassword, setChangePassword] = useState({
+    oldPass: "",
+    newPassOne: "",
+    newPassTwo: "",
+  });
+  const [loadingBtn, setLoadingBtn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenSearch, setIsOpenSearch] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
@@ -66,49 +109,7 @@ const Navbar = ({ setRefresh, refresh, setUserSession }) => {
     setAnchorEl(null);
   };
   // end
-  const inputAnimation = {
-    hidden: {
-      width: 0,
-      padding: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        type: "spring",
-        damping: 20,
-      },
-    },
-    show: {
-      width: "200px",
-      height: "35px",
-      padding: "5px 15px",
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        type: "spring",
-        damping: 10,
-      },
-    },
-  };
-  const showAnimation = {
-    hidden: {
-      width: 0,
-      opacity: 0,
-      transition: {
-        duration: 0.5,
-        type: "spring",
-        damping: 10,
-      },
-    },
-    show: {
-      width: "auto",
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        type: "spring",
-        damping: 8,
-      },
-    },
-  };
+
   const routes = [
     {
       path: "/",
@@ -141,6 +142,39 @@ const Navbar = ({ setRefresh, refresh, setUserSession }) => {
         console.log(err);
         toast.warn(err.response.data.message);
       });
+  };
+  const handleChangePassChange = (e) => {
+    let { name, value } = e.target;
+    setChangePassword({ ...changePassword, [name]: value });
+  };
+  const handlePassChangeSub = (e) => {
+    e.preventDefault();
+    if (
+      !changePassword.newPassOne ||
+      !changePassword.newPassTwo ||
+      !changePassword.oldPass
+    ) {
+      toast.warn("Please fill the data");
+    } else {
+      setLoadingBtn(true);
+      axios
+        .post(
+          process.env.REACT_APP_BACKEND_URL + "/api/users/resetPassword",
+          changePassword
+        )
+        .then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            toast.success(res.data.message);
+            setLoadingBtn(false);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.warn(err.response.data.message);
+          setLoadingBtn(false);
+        });
+    }
   };
   // logout modal
 
@@ -241,79 +275,127 @@ const Navbar = ({ setRefresh, refresh, setUserSession }) => {
               <Box sx={style}>
                 <div className="modal-modal-title" variant="h6" component="h2">
                   <div className="modal_container">
-                    <div className="Password_change_heading">Change Password</div>
-                    <div className="modal_inputs">
-                      <div>
-                        <FormControl
-                          sx={{ m: 1, width: "35ch" }}
+                    <div className="Password_change_heading">
+                      Change Password
+                    </div>
+                    <form onSubmit={handlePassChangeSub}>
+                      <div className="modal_inputs">
+                        <div>
+                          <FormControl fullWidth variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-password">
+                              Old Password
+                            </InputLabel>
+                            <OutlinedInput
+                              id="outlined-adornment-password"
+                              type={showPassword ? "text" : "password"}
+                              name="oldPass"
+                              value={changePassword.oldPass}
+                              required
+                              onChange={handleChangePassChange}
+                              endAdornment={
+                                <InputAdornment position="end">
+                                  <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                  >
+                                    {showPassword ? (
+                                      <VisibilityOff />
+                                    ) : (
+                                      <Visibility />
+                                    )}
+                                  </IconButton>
+                                </InputAdornment>
+                              }
+                              label="Password"
+                            />
+                          </FormControl>
+                        </div>
+                        <div>
+                          <FormControl
+                            sx={{ m: 1, width: "35ch" }}
+                            variant="outlined"
+                          >
+                            <InputLabel htmlFor="outlined-adornment-password">
+                              Password
+                            </InputLabel>
+                            <OutlinedInput
+                              id="outlined-adornment-password"
+                              type={showPassword ? "text" : "password"}
+                              name="newPassOne"
+                              value={changePassword.newPassOne}
+                              required
+                              onChange={handleChangePassChange}
+                              endAdornment={
+                                <InputAdornment position="end">
+                                  <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                  >
+                                    {showPassword ? (
+                                      <VisibilityOff />
+                                    ) : (
+                                      <Visibility />
+                                    )}
+                                  </IconButton>
+                                </InputAdornment>
+                              }
+                              label="Password"
+                            />
+                          </FormControl>
+                        </div>
+                        <div>
+                          <FormControl
+                            sx={{ m: 1, width: "35ch" }}
+                            variant="outlined"
+                          >
+                            <InputLabel htmlFor="outlined-adornment-password">
+                              Confirm Password
+                            </InputLabel>
+                            <OutlinedInput
+                              id="outlined-adornment-password"
+                              type={showPassword ? "text" : "password"}
+                              name="newPassTwo"
+                              value={changePassword.newPassTwo}
+                              required
+                              onChange={handleChangePassChange}
+                              endAdornment={
+                                <InputAdornment position="end">
+                                  <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                  >
+                                    {showPassword ? (
+                                      <VisibilityOff />
+                                    ) : (
+                                      <Visibility />
+                                    )}
+                                  </IconButton>
+                                </InputAdornment>
+                              }
+                              label="Password"
+                            />
+                          </FormControl>
+                        </div>
+                      </div>
+                      <div className="modal_btns">
+                        <Button variant="outlined" color="error">
+                          Cancel
+                        </Button>
+                        <LoadingButton
+                          loading={loadingBtn}
+                          type="submit"
                           variant="outlined"
                         >
-                          <InputLabel htmlFor="outlined-adornment-password">
-                            Password
-                          </InputLabel>
-                          <OutlinedInput  
-                            id="outlined-adornment-password"
-                            type={showPassword ? "text" : "password"}
-                            endAdornment={
-                              <InputAdornment position="end">
-                                <IconButton
-                                  aria-label="toggle password visibility"
-                                  onClick={handleClickShowPassword}
-                                  onMouseDown={handleMouseDownPassword}
-                                  edge="end"
-                                >
-                                  {showPassword ? (
-                                    <VisibilityOff />
-                                  ) : (
-                                    <Visibility />
-                                  )}
-                                </IconButton>
-                              </InputAdornment>
-                            }
-                            label="Password"
-                          />
-                        </FormControl>
+                          Submit
+                        </LoadingButton>
                       </div>
-                      <div>
-                        <FormControl
-                          sx={{ m: 1, width: "35ch" }}
-                          variant="outlined"
-                        >
-                          <InputLabel htmlFor="outlined-adornment-password">
-                            Password
-                          </InputLabel>
-                          <OutlinedInput
-                            id="outlined-adornment-password"
-                            type={showPassword ? "text" : "password"}
-                            endAdornment={
-                              <InputAdornment position="end">
-                                <IconButton
-                                  aria-label="toggle password visibility"
-                                  onClick={handleClickShowPassword}
-                                  onMouseDown={handleMouseDownPassword}
-                                  edge="end"
-                                >
-                                  {showPassword ? (
-                                    <VisibilityOff />
-                                  ) : (
-                                    <Visibility />
-                                  )}
-                                </IconButton>
-                              </InputAdornment>
-                            }
-                            label="Password"
-                          />
-                        </FormControl>
-                      </div>
-                    </div>
-                    <div className="modal_btns">
-                      <Button variant="outlined" color="error">
-                        Cancel
-                      </Button>
-                      <LoadingButton loading variant="outlined">
-                        Submit
-                      </LoadingButton>
-                    </div>
+                    </form>
                   </div>
                 </div>
               </Box>

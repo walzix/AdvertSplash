@@ -65,10 +65,18 @@ const Apps = () => {
             toast.success(res.data.message);
             setRefresh(!refresh);
             setLoadingBtn(false);
+            handleModalClose();
+            setAddApp({
+              appName: "",
+              appComID: "",
+              appType: "",
+              clientEmail: "",
+              appNiche: "",
+            });
           }
         })
         .catch((err) => {
-          console.log();
+          console.log(err);
         });
     }
   };
@@ -110,11 +118,9 @@ const Apps = () => {
           <div>APPS</div>
           <div className="AddApps__btn____Apps__Download__btn___container">
             <button className="AddApps__btn" onClick={handlemodalOpen}>
-              
               <HiViewGridAdd className="Add__app_Icon" /> ADD APPS
             </button>
             <button className="Apps__Download__btn">
-              
               <HiDownload className="apps__download__Icon" /> DOWNLOAD
             </button>
           </div>

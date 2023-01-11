@@ -211,6 +211,7 @@ const UsersTable = ({
                 rowsPerPageOptions={[5]}
                 disableSelectionOnClick
                 experimentalFeatures={{ newEditingApi: true }}
+                components={{Toolbar:GridToolbar}}
               />
             </Box>
           </div>

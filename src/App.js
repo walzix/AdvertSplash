@@ -10,6 +10,7 @@ import Admin from "./Pages/Admin/Admin";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import ErrorPage from "./Pages/ErrorPage";
+import UserVerify from "./Pages/User/UserVerify/UserVerify";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
@@ -154,6 +155,7 @@ const App = () => {
           <Route path="/User/UserApps" element={UserWhole()} />
           <Route path="/User/UserSites" element={UserWhole()} />
           {/* Error page  */}
+          <Route path="/UserVerify" element={<UserVerify />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
